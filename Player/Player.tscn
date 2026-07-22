@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cx5ghr7oecywv"]
 
 [ext_resource type="Script" uid="uid://dhk5324fslcmn" path="res://Player/player.gd" id="1_q3lat"]
-[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://Assets/icon.svg" id="2_tok1r"]
+[ext_resource type="Texture2D" uid="uid://curnselommeqd" path="res://Assets/caca.png" id="2_q3lat"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8c8n"]
 
@@ -15,5 +15,4 @@ speed = 100.0
 shape = SubResource("RectangleShape2D_h8c8n")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1791162566]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_tok1r")
+texture = ExtResource("2_q3lat")

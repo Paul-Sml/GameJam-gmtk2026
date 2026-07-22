@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://npnutmg8mqpu"]
 
 [ext_resource type="Script" uid="uid://b104rhgwu0dqr" path="res://Enemies/enemies.gd" id="1_nn1jb"]
-[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://Assets/icon.svg" id="2_e0ymx"]
+[ext_resource type="Texture2D" uid="uid://curnselommeqd" path="res://Assets/caca.png" id="2_nn1jb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5eq1"]
 
@@ -16,5 +16,4 @@ shape = SubResource("RectangleShape2D_q5eq1")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=830927806]
 self_modulate = Color(1, 0.41960785, 0.3882353, 1)
 position = Vector2(-0.12499976, 0.12499976)
-scale = Vector2(0.15820313, 0.15820313)
-texture = ExtResource("2_e0ymx")
+texture = ExtResource("2_nn1jb")
