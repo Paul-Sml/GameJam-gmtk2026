@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://do8qr8om2w3yh"]
+
+[ext_resource type="Script" uid="uid://bghr5ypm7431h" path="res://UI/Timer/timer.gd" id="1_penv4"]
+
+[node name="Timer" type="Control" unique_id=1613158427]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_penv4")
+
+[node name="Label" type="Label" parent="." unique_id=673600606]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "15"
+
+[node name="Timer" type="Timer" parent="." unique_id=1839365424]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
