@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://cx5ghr7oecywv"]
 
 [ext_resource type="Script" uid="uid://dhk5324fslcmn" path="res://Player/player.gd" id="1_q3lat"]
-[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="2_tok1r"]
+[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://Assets/icon.svg" id="2_tok1r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8c8n"]
 
-[node name="Player" type="CharacterBody2D" unique_id=815963282]
+[node name="Player" type="CharacterBody2D" unique_id=815963282 groups=["player"]]
 z_index = 1
+motion_mode = 1
 script = ExtResource("1_q3lat")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=377639271]

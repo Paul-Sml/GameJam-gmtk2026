@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://tojyqnljvix0"]
+
+[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://Assets/icon.svg" id="1_02fxq"]
+[ext_resource type="PackedScene" uid="uid://cx5ghr7oecywv" path="res://Player/Player.tscn" id="2_pfo1v"]
+[ext_resource type="PackedScene" uid="uid://cy3365nte64vs" path="res://UI/TickableCounter.tscn" id="3_w7d1t"]
+[ext_resource type="PackedScene" uid="uid://npnutmg8mqpu" path="res://Enemies/enemies.tscn" id="4_pfo1v"]
+
+[node name="Testlevel" type="Node2D" unique_id=1901868416]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=342216234]
+position = Vector2(455, 245.00003)
+scale = Vector2(9.328125, 4.1796875)
+texture = ExtResource("1_02fxq")
+
+[node name="Player" parent="." unique_id=815963282 instance=ExtResource("2_pfo1v")]
+
+[node name="TickableCounter" parent="." unique_id=306182148 instance=ExtResource("3_w7d1t")]
+offset_left = 720.0
+offset_top = 54.0
+offset_right = 760.0
+offset_bottom = 134.0
+
+[node name="Enemies" parent="." unique_id=711083395 instance=ExtResource("4_pfo1v")]
+position = Vector2(510, 322)

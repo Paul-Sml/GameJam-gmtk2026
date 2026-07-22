@@ -5,8 +5,8 @@ extends CharacterBody2D
 func _physics_process(delta: float) -> void:
 	var input_vector := Vector2.ZERO
 	
-	input_vector.x = Input.get_axis("ui_left", "ui_right")
-	input_vector.y = Input.get_axis("ui_up", "ui_down")
+	input_vector.x = Input.get_axis("left", "right")
+	input_vector.y = Input.get_axis("up", "down")
 	
 	input_vector = input_vector.normalized()
 	
