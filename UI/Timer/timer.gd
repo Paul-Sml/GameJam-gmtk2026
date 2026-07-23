@@ -9,7 +9,7 @@ signal timer_reached_zero
 var remaining_time: int:
 	set(value):
 		remaining_time = value
-		if remaining_time <= 0:
+		if remaining_time == 0:
 			_self_timer_finished()
 
 func _self_timer_finished() -> void:

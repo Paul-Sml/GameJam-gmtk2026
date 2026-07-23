@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://npnutmg8mqpu"]
 
-[ext_resource type="Script" uid="uid://b104rhgwu0dqr" path="res://Enemies/enemies.gd" id="1_nn1jb"]
+[ext_resource type="Script" uid="uid://b104rhgwu0dqr" path="res://Entities/Enemies/enemies.gd" id="1_nn1jb"]
 [ext_resource type="Texture2D" uid="uid://curnselommeqd" path="res://Assets/caca.png" id="2_nn1jb"]
+[ext_resource type="Script" uid="uid://cen50wtf211c1" path="res://Entities/hurtbox.gd" id="3_wkuld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5eq1"]
+size = Vector2(32, 32)
 
 [node name="Enemies" type="CharacterBody2D" unique_id=711083395]
 motion_mode = 1
 script = ExtResource("1_nn1jb")
+health = null
 speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=249277601]
@@ -17,3 +20,12 @@ shape = SubResource("RectangleShape2D_q5eq1")
 self_modulate = Color(1, 0.41960785, 0.3882353, 1)
 position = Vector2(-0.12499976, 0.12499976)
 texture = ExtResource("2_nn1jb")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=783155998]
+collision_layer = 5
+collision_mask = 2
+script = ExtResource("3_wkuld")
+metadata/_custom_type_script = "uid://cen50wtf211c1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1788161983]
+shape = SubResource("RectangleShape2D_q5eq1")
