@@ -1,28 +1,36 @@
 extends CharacterBody2D
 
+signal armor_updated(amount:int)
+var resource:CharacterStatsResource
+var current_armor: int = 2
+
 @export var speed: float = 600.0
 @onready var hit_box: Hitbox = %HitBox
 @onready var attack_cooldown: Timer = %Cooldown
 const ATTACK_DURATION: float = 0.3
 
-func _ready() -> void:
-	print("Window size: ", get_window().size)
-	print("Viewport size: ", get_viewport().size)
+var knockback_velocity: Vector2 = Vector2.ZERO
+const KNOCKBACK_POWER: float = 1200
 
-func _on_resized() -> void:
-	print("Resized! New size: ", get_window().size)
-	
+func set_resource(player_resource: CharacterStatsResource) -> void:
+	resource = player_resource
+	current_armor = player_resource.armor
+
 func _physics_process(delta: float) -> void:
-	movement()
+	movement(delta)
 	attacking()
 
-func movement() -> void:
-	var input_vector := Vector2.ZERO
-	input_vector.x = Input.get_axis("left", "right")
-	input_vector.y = Input.get_axis("up", "down")
-	input_vector = input_vector.normalized()
-	
-	velocity = input_vector * speed
+func movement(delta: float) -> void:
+	if knockback_velocity.length() > 0:
+		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 3000 * delta)
+		velocity = knockback_velocity
+	else:
+		var input_vector := Vector2.ZERO
+		input_vector.x = Input.get_axis("left", "right")
+		input_vector.y = Input.get_axis("up", "down")
+		input_vector = input_vector.normalized()
+		
+		velocity = input_vector * speed
 	move_and_slide()
 
 func attacking() -> void:
@@ -37,11 +45,14 @@ func attacking() -> void:
 		hit_box.monitorable = false
 
 
-func _on_hit_box_area_entered(area: Area2D) -> void:
-	print(area)
-	pass # Replace with function body.
+func receive_attack(hitbox: Hitbox) -> void:
+	var knockback_direction: Vector2 = (global_position - hitbox.global_position).normalized()
+	knockback_velocity = knockback_direction * KNOCKBACK_POWER
+	take_damage()
+	pass
 
-
-func _on_hit_box_body_entered(body: Node2D) -> void:
-	print(body)
-	pass # Replace with function body.
+func take_damage() -> void:
+	if current_armor == 0:
+		print("defeat")
+	current_armor -= 1
+	armor_updated.emit()

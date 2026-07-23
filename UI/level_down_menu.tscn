@@ -29,24 +29,33 @@ texture = ExtResource("1_v7bdp")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1376255613]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -134.0
-offset_right = 134.0
-offset_bottom = 192.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_top = 16
 
-[node name="Menus" type="VBoxContainer" parent="MarginContainer" unique_id=169025888]
-layout_mode = 2
-theme_override_constants/separation = 16
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1852372999]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.75
+offset_top = -106.25
+offset_right = -36.75
+offset_bottom = 85.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
 
-[node name="Level" type="HBoxContainer" parent="MarginContainer/Menus" unique_id=1221490192]
+[node name="Level" type="HBoxContainer" parent="VBoxContainer" unique_id=1221490192]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Level" type="Label" parent="MarginContainer/Menus/Level" unique_id=2053648574]
+[node name="Level" type="Label" parent="VBoxContainer/Level" unique_id=2053648574]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 0.92156863, 0.64705884, 1)
@@ -57,13 +66,13 @@ text = "Level "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect3" type="TextureRect" parent="MarginContainer/Menus/Level" unique_id=1706245476]
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/Level" unique_id=1706245476]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_dwoxl")
 
-[node name="LevelLabel" type="Label" parent="MarginContainer/Menus/Level/TextureRect3" unique_id=1428058069]
+[node name="LevelLabel" type="Label" parent="VBoxContainer/Level/TextureRect3" unique_id=1428058069]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -79,12 +88,12 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RemainingPoints" type="HBoxContainer" parent="MarginContainer/Menus" unique_id=1433910138]
+[node name="RemainingPoints" type="HBoxContainer" parent="VBoxContainer" unique_id=1433910138]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Level" type="Label" parent="MarginContainer/Menus/RemainingPoints" unique_id=1544767370]
+[node name="Level" type="Label" parent="VBoxContainer/RemainingPoints" unique_id=1544767370]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.65882355, 0, 0.9764706, 1)
@@ -95,13 +104,13 @@ text = "Points to assign "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect3" type="TextureRect" parent="MarginContainer/Menus/RemainingPoints" unique_id=969870086]
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/RemainingPoints" unique_id=969870086]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_05s83")
 
-[node name="PointsLabel" type="Label" parent="MarginContainer/Menus/RemainingPoints/TextureRect3" unique_id=677518283]
+[node name="PointsLabel" type="Label" parent="VBoxContainer/RemainingPoints/TextureRect3" unique_id=677518283]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -117,160 +126,171 @@ text = "-2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Menus" unique_id=173921963]
-layout_mode = 2
-theme_override_constants/margin_top = 16
-
-[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/Menus/MarginContainer" unique_id=206772140]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="Armor" type="HBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=2041470644]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="TickableCounter" type="VBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor" unique_id=306182148]
-propagate_maximum_size = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-
-[node name="StatHolder" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor/TickableCounter" unique_id=236620278]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("6_ehsoa")
-stretch_mode = 2
-
-[node name="ArmorLabel" type="Label" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor/TickableCounter/StatHolder" unique_id=1259862459]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ArmorButton" type="TextureButton" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor/TickableCounter" unique_id=517934494]
-custom_minimum_size = Vector2(0, 16)
-custom_maximum_size = Vector2(-1, 16)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("7_rg21y")
-
-[node name="StatIcon" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor" unique_id=2097984527]
-layout_mode = 2
-texture = ExtResource("8_rr061")
-stretch_mode = 2
-
-[node name="Strength" type="HBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=662770086]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="TickableCounter" type="VBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength" unique_id=917302852]
-propagate_maximum_size = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-
-[node name="StatHolder" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength/TickableCounter" unique_id=576220898]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("6_ehsoa")
-stretch_mode = 2
-
-[node name="StrengthLabel" type="Label" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength/TickableCounter/StatHolder" unique_id=1387707334]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrengthButton" type="TextureButton" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength/TickableCounter" unique_id=1585916686]
-custom_minimum_size = Vector2(0, 16)
-custom_maximum_size = Vector2(-1, 16)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("7_rg21y")
-
-[node name="StatIcon" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength" unique_id=921039677]
-layout_mode = 2
-texture = ExtResource("8_rr061")
-stretch_mode = 2
-
-[node name="Speed" type="HBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=880940108]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="TickableCounter" type="VBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed" unique_id=1956248517]
-propagate_maximum_size = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-
-[node name="StatHolder" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed/TickableCounter" unique_id=1746126147]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("6_ehsoa")
-stretch_mode = 2
-
-[node name="SpeedLabel" type="Label" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed/TickableCounter/StatHolder" unique_id=1016905411]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpeedButton" type="TextureButton" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed/TickableCounter" unique_id=1048010615]
-custom_minimum_size = Vector2(0, 16)
-custom_maximum_size = Vector2(-1, 16)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("7_rg21y")
-
-[node name="StatIcon" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed" unique_id=1774295888]
-layout_mode = 2
-texture = ExtResource("8_rr061")
-stretch_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Menus" unique_id=1877258739]
+[node name="ConfirmButtons" type="HBoxContainer" parent="VBoxContainer" unique_id=1877258739]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="Reset" type="TextureButton" parent="MarginContainer/Menus/HBoxContainer" unique_id=1106164159]
+[node name="Reset" type="TextureButton" parent="VBoxContainer/ConfirmButtons" unique_id=1106164159]
 layout_mode = 2
 texture_normal = ExtResource("9_kms23")
 
-[node name="Validate" type="TextureButton" parent="MarginContainer/Menus/HBoxContainer" unique_id=33653587]
+[node name="Validate" type="TextureButton" parent="VBoxContainer/ConfirmButtons" unique_id=33653587]
 layout_mode = 2
 texture_normal = ExtResource("10_d0acn")
 
-[connection signal="pressed" from="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor/TickableCounter/ArmorButton" to="." method="_on_armor_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength/TickableCounter/StrengthButton" to="." method="_on_strength_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed/TickableCounter/SpeedButton" to="." method="_on_speed_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Menus/HBoxContainer/Reset" to="." method="_on_reset_pressed"]
-[connection signal="pressed" from="MarginContainer/Menus/HBoxContainer/Validate" to="." method="_on_validate_pressed"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=147045194]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 43.25
+offset_top = -91.0
+offset_right = 111.25
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Armor" type="HBoxContainer" parent="VBoxContainer2" unique_id=2041470644]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StatIcon" type="TextureRect" parent="VBoxContainer2/Armor" unique_id=2097984527]
+layout_mode = 2
+texture = ExtResource("8_rr061")
+stretch_mode = 2
+
+[node name="TickableCounter" type="VBoxContainer" parent="VBoxContainer2/Armor" unique_id=306182148]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StatHolder" type="TextureRect" parent="VBoxContainer2/Armor/TickableCounter" unique_id=236620278]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_ehsoa")
+stretch_mode = 2
+
+[node name="ArmorLabel" type="Label" parent="VBoxContainer2/Armor/TickableCounter/StatHolder" unique_id=1259862459]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArmorButton" type="TextureButton" parent="VBoxContainer2/Armor/TickableCounter" unique_id=517934494]
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("7_rg21y")
+
+[node name="Strength" type="HBoxContainer" parent="VBoxContainer2" unique_id=662770086]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StatIcon" type="TextureRect" parent="VBoxContainer2/Strength" unique_id=921039677]
+layout_mode = 2
+texture = ExtResource("8_rr061")
+stretch_mode = 2
+
+[node name="TickableCounter" type="VBoxContainer" parent="VBoxContainer2/Strength" unique_id=917302852]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StatHolder" type="TextureRect" parent="VBoxContainer2/Strength/TickableCounter" unique_id=576220898]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_ehsoa")
+stretch_mode = 2
+
+[node name="StrengthLabel" type="Label" parent="VBoxContainer2/Strength/TickableCounter/StatHolder" unique_id=1387707334]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StrengthButton" type="TextureButton" parent="VBoxContainer2/Strength/TickableCounter" unique_id=1585916686]
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("7_rg21y")
+
+[node name="Speed" type="HBoxContainer" parent="VBoxContainer2" unique_id=880940108]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StatIcon" type="TextureRect" parent="VBoxContainer2/Speed" unique_id=1774295888]
+layout_mode = 2
+texture = ExtResource("8_rr061")
+stretch_mode = 2
+
+[node name="TickableCounter" type="VBoxContainer" parent="VBoxContainer2/Speed" unique_id=1956248517]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StatHolder" type="TextureRect" parent="VBoxContainer2/Speed/TickableCounter" unique_id=1746126147]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_ehsoa")
+stretch_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="VBoxContainer2/Speed/TickableCounter/StatHolder" unique_id=1016905411]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedButton" type="TextureButton" parent="VBoxContainer2/Speed/TickableCounter" unique_id=1048010615]
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("7_rg21y")
+
+[node name="AllStats" type="MarginContainer" parent="VBoxContainer2" unique_id=173921963]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+
+[connection signal="pressed" from="VBoxContainer/ConfirmButtons/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="VBoxContainer/ConfirmButtons/Validate" to="." method="_on_validate_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Armor/TickableCounter/ArmorButton" to="." method="_on_armor_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Strength/TickableCounter/StrengthButton" to="." method="_on_strength_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Speed/TickableCounter/SpeedButton" to="." method="_on_speed_button_pressed"]

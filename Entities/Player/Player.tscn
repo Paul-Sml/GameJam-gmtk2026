@@ -16,20 +16,21 @@ z_index = 1
 motion_mode = 1
 script = ExtResource("1_q3lat")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1791162566]
+scale = Vector2(4, 4)
+texture = ExtResource("2_q3lat")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=377639271]
 shape = SubResource("RectangleShape2D_h8c8n")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1312487426]
+collision_layer = 0
 collision_mask = 4
 script = ExtResource("2_vweq0")
 metadata/_custom_type_script = "uid://cen50wtf211c1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=357535011]
 shape = SubResource("RectangleShape2D_h8c8n")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1791162566]
-scale = Vector2(4, 4)
-texture = ExtResource("2_q3lat")
 
 [node name="Attacks" type="Node2D" parent="." unique_id=214604534]
 
@@ -56,6 +57,3 @@ shape = SubResource("RectangleShape2D_vepnw")
 [node name="Cooldown" type="Timer" parent="Attacks" unique_id=1119776947]
 unique_name_in_owner = true
 one_shot = true
-
-[connection signal="area_entered" from="Attacks/HitBox" to="." method="_on_hit_box_area_entered"]
-[connection signal="body_entered" from="Attacks/HitBox" to="." method="_on_hit_box_body_entered"]

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b104rhgwu0dqr" path="res://Entities/Enemies/enemy.gd" id="1_6rqwt"]
 [ext_resource type="Texture2D" uid="uid://curnselommeqd" path="res://Assets/caca.png" id="2_4jf10"]
 [ext_resource type="Script" uid="uid://cen50wtf211c1" path="res://Entities/hurtbox.gd" id="3_ihd1f"]
+[ext_resource type="Script" uid="uid://bdptp85u1de4u" path="res://Entities/hitbox.gd" id="4_4jf10"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5eq1"]
 size = Vector2(128, 128)
@@ -24,10 +25,19 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_4jf10")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=783155998]
-collision_layer = 5
+collision_layer = 4
 collision_mask = 2
 script = ExtResource("3_ihd1f")
 metadata/_custom_type_script = "uid://cen50wtf211c1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1788161983]
+shape = SubResource("RectangleShape2D_q5eq1")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1387159830]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_4jf10")
+metadata/_custom_type_script = "uid://bdptp85u1de4u"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1710623748]
 shape = SubResource("RectangleShape2D_q5eq1")

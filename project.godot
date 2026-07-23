@@ -29,6 +29,10 @@ window/stretch/mode="canvas_items"
 
 player=""
 
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
 [input]
 
 up={
@@ -65,6 +69,7 @@ LMB={
 
 2d_physics/layer_2="PlayerAttacks"
 2d_physics/layer_3="MonsterAttacks"
+2d_physics/layer_4="EnemyColision"
 
 [physics]
 
