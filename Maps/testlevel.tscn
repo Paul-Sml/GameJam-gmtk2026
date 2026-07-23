@@ -1,29 +1,13 @@
 [gd_scene format=3 uid="uid://tojyqnljvix0"]
 
 [ext_resource type="PackedScene" uid="uid://cx5ghr7oecywv" path="res://Entities/Player/Player.tscn" id="2_pfo1v"]
-[ext_resource type="PackedScene" uid="uid://cy3365nte64vs" path="res://UI/TickableCounter.tscn" id="3_w7d1t"]
 [ext_resource type="PackedScene" uid="uid://npnutmg8mqpu" path="res://Entities/Enemies/enemies.tscn" id="4_pfo1v"]
-[ext_resource type="PackedScene" uid="uid://do8qr8om2w3yh" path="res://UI/Timer/timer.tscn" id="4_w7d1t"]
 
 [node name="Testlevel" type="Node2D" unique_id=1901868416]
 
 [node name="Player" parent="." unique_id=815963282 instance=ExtResource("2_pfo1v")]
 
-[node name="TickableCounter" parent="." unique_id=306182148 instance=ExtResource("3_w7d1t")]
-offset_left = -229.0
-offset_top = -129.0
-offset_right = -189.0
-offset_bottom = -49.0
-
 [node name="Enemies" parent="." unique_id=711083395 instance=ExtResource("4_pfo1v")]
-position = Vector2(148, 84)
-health = 3
-
-[node name="Timer" parent="." unique_id=1613158427 instance=ExtResource("4_w7d1t")]
-offset_left = 200.0
-offset_top = -119.0
-offset_right = 200.0
-offset_bottom = -119.0
+position = Vector2(693, 410)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=913770846]
-zoom = Vector2(4, 4)

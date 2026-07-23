@@ -1,7 +1,7 @@
 extends Control
 
-@onready var timer: Timer = $Timer
-@onready var label: Label = $Label
+@onready var timer: Timer = %Timer
+@onready var label: Label = %Label
 
 signal timer_reached_zero
 

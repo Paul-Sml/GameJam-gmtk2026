@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 300.0
+@export var speed: float = 600.0
 @onready var hit_box: Area2D = $Attacks/HitBox
 
 func _ready() -> void:

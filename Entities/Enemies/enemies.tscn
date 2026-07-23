@@ -5,13 +5,11 @@
 [ext_resource type="Script" uid="uid://cen50wtf211c1" path="res://Entities/hurtbox.gd" id="3_wkuld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5eq1"]
-size = Vector2(32, 32)
+size = Vector2(128, 128)
 
 [node name="Enemies" type="CharacterBody2D" unique_id=711083395]
 motion_mode = 1
 script = ExtResource("1_nn1jb")
-health = null
-speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=249277601]
 shape = SubResource("RectangleShape2D_q5eq1")
@@ -19,6 +17,7 @@ shape = SubResource("RectangleShape2D_q5eq1")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=830927806]
 self_modulate = Color(1, 0.41960785, 0.3882353, 1)
 position = Vector2(-0.12499976, 0.12499976)
+scale = Vector2(4, 4)
 texture = ExtResource("2_nn1jb")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=783155998]

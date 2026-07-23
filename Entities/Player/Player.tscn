@@ -6,16 +6,15 @@
 [ext_resource type="Script" uid="uid://bdptp85u1de4u" path="res://Entities/hitbox.gd" id="4_1des2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8c8n"]
-size = Vector2(32, 32)
+size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vepnw"]
-size = Vector2(48, 32)
+size = Vector2(184, 128)
 
 [node name="Player" type="CharacterBody2D" unique_id=815963282 groups=["player"]]
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_q3lat")
-speed = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=377639271]
 shape = SubResource("RectangleShape2D_h8c8n")
@@ -29,11 +28,13 @@ metadata/_custom_type_script = "uid://cen50wtf211c1"
 shape = SubResource("RectangleShape2D_h8c8n")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1791162566]
+scale = Vector2(4, 4)
 texture = ExtResource("2_q3lat")
 
 [node name="Attacks" type="Node2D" parent="." unique_id=214604534]
 
 [node name="HitBox" type="Area2D" parent="Attacks" unique_id=1026356782]
+visible = false
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -42,13 +43,13 @@ script = ExtResource("4_1des2")
 metadata/_custom_type_script = "uid://bdptp85u1de4u"
 
 [node name="ColorRect" type="ColorRect" parent="Attacks/HitBox" unique_id=770794530]
-offset_left = 13.0
-offset_top = -16.0
-offset_right = 61.0
-offset_bottom = 16.0
+offset_left = 52.0
+offset_top = -64.0
+offset_right = 236.0
+offset_bottom = 64.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HitBox" unique_id=73418741]
-position = Vector2(37, 0)
+position = Vector2(144, 0)
 shape = SubResource("RectangleShape2D_vepnw")
 
 [connection signal="area_entered" from="Attacks/HitBox" to="." method="_on_hit_box_area_entered"]

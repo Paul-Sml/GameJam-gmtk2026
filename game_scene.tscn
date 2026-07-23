@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://whoqxqpfyj37"]
+
+[ext_resource type="PackedScene" uid="uid://do8qr8om2w3yh" path="res://UI/Timer/timer.tscn" id="1_mlf6e"]
+[ext_resource type="PackedScene" uid="uid://tojyqnljvix0" path="res://Maps/testlevel.tscn" id="1_po0ka"]
+
+[node name="GameScene" type="Node2D" unique_id=312310118]
+
+[node name="Level" type="Node2D" parent="." unique_id=2007242987]
+position = Vector2(960, 540)
+
+[node name="Testlevel" parent="Level" unique_id=1901868416 instance=ExtResource("1_po0ka")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448152598]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1840073961]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Timer" parent="CanvasLayer/MarginContainer" unique_id=1613158427 instance=ExtResource("1_mlf6e")]
+layout_mode = 2
+
+[node name="LevelDown" type="Control" parent="." unique_id=168814742]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
