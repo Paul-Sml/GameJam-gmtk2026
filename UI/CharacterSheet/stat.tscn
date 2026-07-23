@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d1ydhkcvp8511"]
+
+[ext_resource type="PackedScene" uid="uid://cy3365nte64vs" path="res://UI/CharacterSheet/TickableCounter.tscn" id="1_4un02"]
+[ext_resource type="Texture2D" uid="uid://dltodj6c2ycd1" path="res://Assets/LevelDownMenu/stat_icon_armor.png" id="2_u763c"]
+
+[node name="Stat" type="HBoxContainer" unique_id=2041470644]
+offset_right = 68.0
+offset_bottom = 48.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TickableCounter" parent="." unique_id=306182148 instance=ExtResource("1_4un02")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StatIcon" type="TextureRect" parent="." unique_id=2097984527]
+layout_mode = 2
+texture = ExtResource("2_u763c")
+stretch_mode = 2

@@ -2,7 +2,7 @@ extends VBoxContainer
 
 @onready var label: Label = $ColorRect/Label
 
-@export var value:int = 5
+@export var value:int = 2
 
 func _ready() -> void:
 	updateValue()

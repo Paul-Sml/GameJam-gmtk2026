@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
 @export var speed: float = 600.0
-@onready var hit_box: Area2D = $Attacks/HitBox
+@onready var hit_box: Hitbox = %HitBox
+@onready var attack_cooldown: Timer = %Cooldown
+const ATTACK_DURATION: float = 0.3
 
 func _ready() -> void:
 	print("Window size: ", get_window().size)
@@ -24,12 +26,13 @@ func movement() -> void:
 	move_and_slide()
 
 func attacking() -> void:
-	if Input.is_action_just_pressed("LMB"):
+	if Input.is_action_just_pressed("LMB") and attack_cooldown.is_stopped():
 		print("attack")
+		attack_cooldown.start()
 		hit_box.look_at(get_global_mouse_position())
 		hit_box.visible = true
 		hit_box.monitorable = true
-		await get_tree().create_timer(0.5).timeout #TODO : Real timer
+		await get_tree().create_timer(ATTACK_DURATION).timeout #TODO : Real timer
 		hit_box.visible = false
 		hit_box.monitorable = false
 

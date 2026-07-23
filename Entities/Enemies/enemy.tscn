@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://npnutmg8mqpu"]
 
-[ext_resource type="Script" uid="uid://b104rhgwu0dqr" path="res://Entities/Enemies/enemies.gd" id="1_nn1jb"]
-[ext_resource type="Texture2D" uid="uid://curnselommeqd" path="res://Assets/caca.png" id="2_nn1jb"]
-[ext_resource type="Script" uid="uid://cen50wtf211c1" path="res://Entities/hurtbox.gd" id="3_wkuld"]
+[ext_resource type="Script" uid="uid://b104rhgwu0dqr" path="res://Entities/Enemies/enemy.gd" id="1_6rqwt"]
+[ext_resource type="Texture2D" uid="uid://curnselommeqd" path="res://Assets/caca.png" id="2_4jf10"]
+[ext_resource type="Script" uid="uid://cen50wtf211c1" path="res://Entities/hurtbox.gd" id="3_ihd1f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5eq1"]
 size = Vector2(128, 128)
 
-[node name="Enemies" type="CharacterBody2D" unique_id=711083395]
+[node name="Enemy" type="CharacterBody2D" unique_id=711083395]
+collision_layer = 8
+collision_mask = 8
 motion_mode = 1
-script = ExtResource("1_nn1jb")
+script = ExtResource("1_6rqwt")
+speed = 250.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=249277601]
 shape = SubResource("RectangleShape2D_q5eq1")
@@ -18,12 +21,12 @@ shape = SubResource("RectangleShape2D_q5eq1")
 self_modulate = Color(1, 0.41960785, 0.3882353, 1)
 position = Vector2(-0.12499976, 0.12499976)
 scale = Vector2(4, 4)
-texture = ExtResource("2_nn1jb")
+texture = ExtResource("2_4jf10")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=783155998]
 collision_layer = 5
 collision_mask = 2
-script = ExtResource("3_wkuld")
+script = ExtResource("3_ihd1f")
 metadata/_custom_type_script = "uid://cen50wtf211c1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1788161983]

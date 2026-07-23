@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://cqk7qvvfkqgfr"]
+
+[ext_resource type="Texture2D" uid="uid://b1s7p1r304qwh" path="res://Assets/LevelDownMenu/background.png" id="1_v7bdp"]
+[ext_resource type="Texture2D" uid="uid://b0j7i1le4irrj" path="res://Assets/LevelDownMenu/level.png" id="2_dwoxl"]
+[ext_resource type="PackedScene" uid="uid://d1ydhkcvp8511" path="res://UI/CharacterSheet/stat.tscn" id="2_vhmxk"]
+[ext_resource type="Texture2D" uid="uid://bym645d1o5gup" path="res://Assets/LevelDownMenu/remaining_points.png" id="3_05s83"]
+
+[node name="LevelDownMenu" type="Control" unique_id=2091781716]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1691356031]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_v7bdp")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1376255613]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -134.0
+offset_right = 134.0
+offset_bottom = 192.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 32
+
+[node name="Menus" type="VBoxContainer" parent="MarginContainer" unique_id=169025888]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Level" type="HBoxContainer" parent="MarginContainer/Menus" unique_id=1221490192]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Level" type="Label" parent="MarginContainer/Menus/Level" unique_id=2053648574]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.92156863, 0.64705884, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Level "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/Menus/Level" unique_id=1706245476]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_dwoxl")
+
+[node name="Label" type="Label" parent="MarginContainer/Menus/Level/TextureRect3" unique_id=1428058069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RemainingPoints" type="HBoxContainer" parent="MarginContainer/Menus" unique_id=1433910138]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Level" type="Label" parent="MarginContainer/Menus/RemainingPoints" unique_id=1544767370]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.65882355, 0, 0.9764706, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 16
+text = "Points to assign "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/Menus/RemainingPoints" unique_id=969870086]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_05s83")
+
+[node name="Label" type="Label" parent="MarginContainer/Menus/RemainingPoints/TextureRect3" unique_id=677518283]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 16
+text = "-2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Menus" unique_id=173921963]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/Menus/MarginContainer" unique_id=206772140]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Stat" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=2041470644 instance=ExtResource("2_vhmxk")]
+layout_mode = 2
+
+[node name="Stat2" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=662770086 instance=ExtResource("2_vhmxk")]
+layout_mode = 2
+
+[node name="Stat3" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=880940108 instance=ExtResource("2_vhmxk")]
+layout_mode = 2

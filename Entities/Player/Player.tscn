@@ -34,6 +34,7 @@ texture = ExtResource("2_q3lat")
 [node name="Attacks" type="Node2D" parent="." unique_id=214604534]
 
 [node name="HitBox" type="Area2D" parent="Attacks" unique_id=1026356782]
+unique_name_in_owner = true
 visible = false
 collision_layer = 2
 collision_mask = 0
@@ -51,6 +52,10 @@ offset_bottom = 64.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HitBox" unique_id=73418741]
 position = Vector2(144, 0)
 shape = SubResource("RectangleShape2D_vepnw")
+
+[node name="Cooldown" type="Timer" parent="Attacks" unique_id=1119776947]
+unique_name_in_owner = true
+one_shot = true
 
 [connection signal="area_entered" from="Attacks/HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="body_entered" from="Attacks/HitBox" to="." method="_on_hit_box_body_entered"]
