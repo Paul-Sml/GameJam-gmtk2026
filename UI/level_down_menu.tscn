@@ -1,15 +1,22 @@
 [gd_scene format=3 uid="uid://cqk7qvvfkqgfr"]
 
+[ext_resource type="Script" uid="uid://cjwhw5jj5h5uh" path="res://UI/level_down_menu.gd" id="1_2k3c1"]
 [ext_resource type="Texture2D" uid="uid://b1s7p1r304qwh" path="res://Assets/LevelDownMenu/background.png" id="1_v7bdp"]
 [ext_resource type="Texture2D" uid="uid://b0j7i1le4irrj" path="res://Assets/LevelDownMenu/level.png" id="2_dwoxl"]
-[ext_resource type="PackedScene" uid="uid://d1ydhkcvp8511" path="res://UI/CharacterSheet/stat.tscn" id="2_vhmxk"]
 [ext_resource type="Texture2D" uid="uid://bym645d1o5gup" path="res://Assets/LevelDownMenu/remaining_points.png" id="3_05s83"]
+[ext_resource type="Texture2D" uid="uid://b1yysssaxylsf" path="res://Assets/LevelDownMenu/stat_holder.png" id="6_ehsoa"]
+[ext_resource type="Texture2D" uid="uid://dtchdch4nigm1" path="res://Assets/LevelDownMenu/stat_button.png" id="7_rg21y"]
+[ext_resource type="Texture2D" uid="uid://dltodj6c2ycd1" path="res://Assets/LevelDownMenu/stat_icon_armor.png" id="8_rr061"]
+[ext_resource type="Texture2D" uid="uid://ck2ljbjve1qbu" path="res://Assets/LevelDownMenu/reset.png" id="9_kms23"]
+[ext_resource type="Texture2D" uid="uid://b1nwl4w618dtq" path="res://Assets/LevelDownMenu/Validate.png" id="10_d0acn"]
 
 [node name="LevelDownMenu" type="Control" unique_id=2091781716]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 270.0
+scale = Vector2(4, 4)
+script = ExtResource("1_2k3c1")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1691356031]
 layout_mode = 1
@@ -29,7 +36,7 @@ offset_left = -134.0
 offset_right = 134.0
 offset_bottom = 192.0
 grow_horizontal = 2
-theme_override_constants/margin_top = 32
+theme_override_constants/margin_top = 16
 
 [node name="Menus" type="VBoxContainer" parent="MarginContainer" unique_id=169025888]
 layout_mode = 2
@@ -56,7 +63,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_dwoxl")
 
-[node name="Label" type="Label" parent="MarginContainer/Menus/Level/TextureRect3" unique_id=1428058069]
+[node name="LevelLabel" type="Label" parent="MarginContainer/Menus/Level/TextureRect3" unique_id=1428058069]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,7 +101,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_05s83")
 
-[node name="Label" type="Label" parent="MarginContainer/Menus/RemainingPoints/TextureRect3" unique_id=677518283]
+[node name="PointsLabel" type="Label" parent="MarginContainer/Menus/RemainingPoints/TextureRect3" unique_id=677518283]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,11 +125,152 @@ theme_override_constants/margin_top = 16
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="Stat" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=2041470644 instance=ExtResource("2_vhmxk")]
+[node name="Armor" type="HBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=2041470644]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="Stat2" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=662770086 instance=ExtResource("2_vhmxk")]
+[node name="TickableCounter" type="VBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor" unique_id=306182148]
+propagate_maximum_size = false
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
 
-[node name="Stat3" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=880940108 instance=ExtResource("2_vhmxk")]
+[node name="StatHolder" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor/TickableCounter" unique_id=236620278]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_ehsoa")
+stretch_mode = 2
+
+[node name="ArmorLabel" type="Label" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor/TickableCounter/StatHolder" unique_id=1259862459]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArmorButton" type="TextureButton" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor/TickableCounter" unique_id=517934494]
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("7_rg21y")
+
+[node name="StatIcon" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor" unique_id=2097984527]
+layout_mode = 2
+texture = ExtResource("8_rr061")
+stretch_mode = 2
+
+[node name="Strength" type="HBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=662770086]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TickableCounter" type="VBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength" unique_id=917302852]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StatHolder" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength/TickableCounter" unique_id=576220898]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_ehsoa")
+stretch_mode = 2
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength/TickableCounter/StatHolder" unique_id=1387707334]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StrengthButton" type="TextureButton" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength/TickableCounter" unique_id=1585916686]
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("7_rg21y")
+
+[node name="StatIcon" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength" unique_id=921039677]
+layout_mode = 2
+texture = ExtResource("8_rr061")
+stretch_mode = 2
+
+[node name="Speed" type="HBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer" unique_id=880940108]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TickableCounter" type="VBoxContainer" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed" unique_id=1956248517]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StatHolder" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed/TickableCounter" unique_id=1746126147]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_ehsoa")
+stretch_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed/TickableCounter/StatHolder" unique_id=1016905411]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedButton" type="TextureButton" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed/TickableCounter" unique_id=1048010615]
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("7_rg21y")
+
+[node name="StatIcon" type="TextureRect" parent="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed" unique_id=1774295888]
+layout_mode = 2
+texture = ExtResource("8_rr061")
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Menus" unique_id=1877258739]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Reset" type="TextureButton" parent="MarginContainer/Menus/HBoxContainer" unique_id=1106164159]
+layout_mode = 2
+texture_normal = ExtResource("9_kms23")
+
+[node name="Validate" type="TextureButton" parent="MarginContainer/Menus/HBoxContainer" unique_id=33653587]
+layout_mode = 2
+texture_normal = ExtResource("10_d0acn")
+
+[connection signal="pressed" from="MarginContainer/Menus/MarginContainer/VBoxContainer/Armor/TickableCounter/ArmorButton" to="." method="_on_armor_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Menus/MarginContainer/VBoxContainer/Strength/TickableCounter/StrengthButton" to="." method="_on_strength_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Menus/MarginContainer/VBoxContainer/Speed/TickableCounter/SpeedButton" to="." method="_on_speed_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Menus/HBoxContainer/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="MarginContainer/Menus/HBoxContainer/Validate" to="." method="_on_validate_pressed"]

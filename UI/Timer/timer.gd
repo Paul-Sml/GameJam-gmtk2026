@@ -13,7 +13,6 @@ var remaining_time: int:
 			_self_timer_finished()
 
 func _self_timer_finished() -> void:
-	print("GG")
 	timer_reached_zero.emit()
 
 func _on_timer_timeout() -> void:
@@ -26,3 +25,6 @@ func _ready() -> void:
 
 func updateValue() -> void:
 	label.text = str(remaining_time)
+
+func _on_next_level() -> void:
+	remaining_time = max_time

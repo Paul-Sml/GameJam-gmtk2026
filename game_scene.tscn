@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://do8qr8om2w3yh" path="res://UI/Timer/timer.tscn" id="1_mlf6e"]
 [ext_resource type="PackedScene" uid="uid://tojyqnljvix0" path="res://Maps/testlevel.tscn" id="1_po0ka"]
 [ext_resource type="PackedScene" uid="uid://cqk7qvvfkqgfr" path="res://UI/level_down_menu.tscn" id="3_v1wow"]
+[ext_resource type="Script" uid="uid://dn6pv21vjkypn" path="res://Entities/Player/PlayerStats/CharStatsResource.gd" id="4_mixcd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_po0ka"]
 bg_color = Color(0.32156864, 0.28627452, 0.34117648, 1)
@@ -10,9 +11,14 @@ bg_color = Color(0.32156864, 0.28627452, 0.34117648, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1wow"]
 bg_color = Color(0.85882354, 0.87058824, 1, 1)
 
+[sub_resource type="Resource" id="Resource_v1wow"]
+script = ExtResource("4_mixcd")
+metadata/_custom_type_script = "uid://dn6pv21vjkypn"
+
 [node name="GameScene" type="Node2D" unique_id=312310118]
 
 [node name="Level" type="Node2D" parent="." unique_id=2007242987]
+unique_name_in_owner = true
 position = Vector2(960, 540)
 
 [node name="Testlevel" parent="Level" unique_id=1901868416 instance=ExtResource("1_po0ka")]
@@ -62,3 +68,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LevelDownMenu" parent="." unique_id=2091781716 instance=ExtResource("3_v1wow")]
+visible = false
+player_resource = SubResource("Resource_v1wow")
+
+[connection signal="timer_reached_zero" from="CanvasLayer/Timer" to="LevelDownMenu" method="_on_timer_reached_zero"]
+[connection signal="next_level" from="LevelDownMenu" to="CanvasLayer/Timer" method="_on_next_level"]
