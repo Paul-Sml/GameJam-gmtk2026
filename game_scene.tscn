@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c8el6ix1m6vux" path="res://game_manager.gd" id="1_mj2jn"]
 [ext_resource type="PackedScene" uid="uid://do8qr8om2w3yh" path="res://UI/Timer/timer.tscn" id="1_mlf6e"]
-[ext_resource type="PackedScene" uid="uid://tojyqnljvix0" path="res://Maps/testlevel.tscn" id="1_po0ka"]
 [ext_resource type="PackedScene" uid="uid://cqk7qvvfkqgfr" path="res://UI/level_down_menu.tscn" id="3_v1wow"]
 [ext_resource type="Texture2D" uid="uid://dltodj6c2ycd1" path="res://Assets/LevelDownMenu/stat_icon_armor.png" id="4_kdryc"]
 [ext_resource type="Script" uid="uid://dn6pv21vjkypn" path="res://Entities/Player/PlayerStats/CharStatsResource.gd" id="4_mixcd"]
@@ -20,18 +19,16 @@ script = ExtResource("1_mj2jn")
 unique_name_in_owner = true
 position = Vector2(960, 540)
 
-[node name="Testlevel" parent="CurrentLevel" unique_id=1901868416 instance=ExtResource("1_po0ka")]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448152598]
 unique_name_in_owner = true
 
 [node name="Timer" parent="CanvasLayer" unique_id=1613158427 instance=ExtResource("1_mlf6e")]
+unique_name_in_owner = true
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 20.0
 offset_bottom = 20.0
 mouse_filter = 2
-max_time = 2
 
 [node name="PlayerUI" type="Control" parent="CanvasLayer" unique_id=1515167098]
 layout_mode = 3
@@ -226,4 +223,4 @@ mouse_filter = 0
 player_resource = SubResource("Resource_v1wow")
 
 [connection signal="timer_reached_zero" from="CanvasLayer/Timer" to="." method="_on_timer_timer_reached_zero"]
-[connection signal="next_level" from="LevelDownMenu" to="CanvasLayer/Timer" method="_on_next_level"]
+[connection signal="next_level" from="LevelDownMenu" to="." method="_on_next_level"]
