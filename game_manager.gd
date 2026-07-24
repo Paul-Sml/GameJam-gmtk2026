@@ -7,35 +7,57 @@ var levels: Array[String] = [
 	"res://Maps/level-1.tscn"
 ]
 var timers: Array[int] = [
-	2,
-	2,
-	2
+	5,
+	5,
+	5
 ]
 
+@onready var armor_label: Label = %ArmorLabel
+@onready var strength_label: Label = %StrengthLabel
+@onready var speed_label: Label = %SpeedLabel
 
 @onready var current_level: Node2D = %CurrentLevel
 @onready var canvas_layer: CanvasLayer = %CanvasLayer
 @onready var level_down_menu: LevelDownMenu = %LevelDownMenu
 @onready var timer: GameTimer = %Timer
+@onready var survive: Sprite2D = %Survive
 
 @onready var armor_icons: HBoxContainer = %ArmorIcons
 
 func _ready() -> void:
+	PlayerStats.armor_updated.connect(_on_player_armor_updated)
 	new_stage()
 
 func new_stage() -> void:
 	print("new level !")
 	load_stage(level_id)
-	level_id += 1
-	var player: Player = find_player_in_current_level()
-	if player == null:
-		push_error("No player found in current level")
-		return
-	player.armor_updated.connect(_on_player_armor_updated)
+	
+	armor_label.text = str(PlayerStats.resource.armor)
+	strength_label.text = str(PlayerStats.resource.strength)
+	speed_label.text = str(PlayerStats.resource.speed)
+	
+	survive.visible = true
+	await wait_for_input()
+	survive.visible = false
+	
+	PlayerStats.reset_current_armor()
 	current_level.visible = true
 	current_level.process_mode = Node2D.PROCESS_MODE_INHERIT
 	canvas_layer.visible = true
+	timer.start_timer(timers[level_id])
+	level_id += 1
 
+func wait_for_input() -> void:
+	while true:
+		await get_tree().process_frame
+		if (
+			Input.is_action_just_pressed("left") or \
+			Input.is_action_just_pressed("right") or \
+			Input.is_action_just_pressed("up") or \
+			Input.is_action_just_pressed("down") or \
+			Input.is_action_just_pressed("LMB")
+			):
+			break
 
 func load_stage(index: int) -> void:
 	print("loading level ", index)
@@ -44,7 +66,6 @@ func load_stage(index: int) -> void:
 	var level_instance: Node = level_scene.instantiate()
 	
 	current_level.add_child(level_instance)
-	timer.start_timer(timers[index])
 
 func find_player_in_current_level() -> Player:
 	for player in get_tree().get_nodes_in_group("player"):

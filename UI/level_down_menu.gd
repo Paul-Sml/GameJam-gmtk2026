@@ -1,9 +1,8 @@
 extends Control
 class_name LevelDownMenu
 
-signal next_level
+signal next_level()
 
-@export var player_resource: CharacterStatsResource
 var saved_player_resource: CharacterStatsResource
 @onready var level_down_transi: TextureButton = %LevelDownTransi
 @onready var armor_button: TextureButton = $Menuing/VBoxContainer2/Armor/TickableCounter/ArmorButton
@@ -20,11 +19,11 @@ var can_skip: bool = false
 	
 func level_down() -> void:
 	print("level down")
-	player_resource.level_down()
+	PlayerStats.resource.level_down()
 	level_down_transi.visible = true
 	get_tree().create_timer(1.0).timeout.connect(func(): can_skip = true)
 	#level_down_transi.disabled = false
-	saved_player_resource = player_resource.duplicate(true)
+	saved_player_resource = PlayerStats.resource.duplicate(true)
 	update_visuals()
 	visible = true
 
@@ -43,54 +42,54 @@ func close_menu() -> void:
 @onready var speed_label: Label = %SpeedLabel
 
 func update_visuals() -> void:
-	level_label.text = str(player_resource.level)
-	points_label.text = str(player_resource.points_remaining)
-	armor_label.text = str(player_resource.armor)
-	strength_label.text = str(player_resource.strength)
-	speed_label.text = str(player_resource.speed)
-	if player_resource.points_remaining == 0:
+	level_label.text = str(PlayerStats.resource.level)
+	points_label.text = str(PlayerStats.resource.points_remaining)
+	armor_label.text = str(PlayerStats.resource.armor)
+	strength_label.text = str(PlayerStats.resource.strength)
+	speed_label.text = str(PlayerStats.resource.speed)
+	if PlayerStats.resource.points_remaining == 0:
 		visible_buttons(false)
 	else:
 		visible_buttons(true)
 
 func _on_armor_button_pressed() -> void:
-	if player_resource.points_remaining < 0:
-		player_resource.armor -= 1
-		armor_label.text = str(player_resource.armor)
-		player_resource.points_remaining += 1
-		points_label.text = str(player_resource.points_remaining)
-		if player_resource.points_remaining == 0:
+	if PlayerStats.resource.points_remaining < 0:
+		PlayerStats.resource.armor -= 1
+		armor_label.text = str(PlayerStats.resource.armor)
+		PlayerStats.resource.points_remaining += 1
+		points_label.text = str(PlayerStats.resource.points_remaining)
+		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
 
 func _on_strength_button_pressed() -> void:
-	if player_resource.points_remaining < 0:
-		player_resource.strength -= 1
-		strength_label.text = str(player_resource.strength)
-		player_resource.points_remaining += 1
-		points_label.text = str(player_resource.points_remaining)
-		if player_resource.points_remaining == 0:
+	if PlayerStats.resource.points_remaining < 0:
+		PlayerStats.resource.strength -= 1
+		strength_label.text = str(PlayerStats.resource.strength)
+		PlayerStats.resource.points_remaining += 1
+		points_label.text = str(PlayerStats.resource.points_remaining)
+		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
 
 func _on_speed_button_pressed() -> void:
-	if player_resource.points_remaining < 0:
-		player_resource.speed -= 1
-		speed_label.text = str(player_resource.speed)
-		player_resource.points_remaining += 1
-		points_label.text = str(player_resource.points_remaining)
-		if player_resource.points_remaining == 0:
+	if PlayerStats.resource.points_remaining < 0:
+		PlayerStats.resource.speed -= 1
+		speed_label.text = str(PlayerStats.resource.speed)
+		PlayerStats.resource.points_remaining += 1
+		points_label.text = str(PlayerStats.resource.points_remaining)
+		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
 
-func visible_buttons(visible: bool) -> void:
-	armor_button.modulate = Color(1, 1, 1, 1 if visible else 0)
-	strength_button.modulate = Color(1, 1, 1, 1 if visible else 0)
-	speed_button.modulate = Color(1, 1, 1, 1 if visible else 0)
+func visible_buttons(_is_visible: bool) -> void:
+	armor_button.modulate = Color(1, 1, 1, 1 if _is_visible else 0)
+	strength_button.modulate = Color(1, 1, 1, 1 if _is_visible else 0)
+	speed_button.modulate = Color(1, 1, 1, 1 if _is_visible else 0)
 
 func _on_reset_pressed() -> void:
-	player_resource = saved_player_resource.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
+	PlayerStats.resource = saved_player_resource.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
 	update_visuals()
 
 func _on_validate_pressed() -> void:
-	if player_resource.points_remaining < 0:
+	if PlayerStats.resource.points_remaining < 0:
 		remaining_points_texture.modulate = Color(1, 0.2, 0.2, 1)
 		await get_tree().create_timer(1).timeout
 		remaining_points_texture.modulate = Color(1, 1, 1, 1)

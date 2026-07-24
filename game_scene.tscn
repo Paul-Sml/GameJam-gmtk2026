@@ -4,20 +4,24 @@
 [ext_resource type="PackedScene" uid="uid://do8qr8om2w3yh" path="res://UI/Timer/timer.tscn" id="1_mlf6e"]
 [ext_resource type="PackedScene" uid="uid://cqk7qvvfkqgfr" path="res://UI/level_down_menu.tscn" id="3_v1wow"]
 [ext_resource type="Texture2D" uid="uid://dltodj6c2ycd1" path="res://Assets/LevelDownMenu/stat_icon_armor.png" id="4_kdryc"]
-[ext_resource type="Script" uid="uid://dn6pv21vjkypn" path="res://Entities/Player/PlayerStats/CharStatsResource.gd" id="4_mixcd"]
 [ext_resource type="Texture2D" uid="uid://b1yysssaxylsf" path="res://Assets/LevelDownMenu/stat_holder.png" id="5_e35lh"]
+[ext_resource type="Texture2D" uid="uid://4iy3dio86avk" path="res://Assets/Other UI/survive_screen.png" id="6_e35lh"]
 [ext_resource type="Texture2D" uid="uid://dtchdch4nigm1" path="res://Assets/LevelDownMenu/stat_button.png" id="6_udeyl"]
-
-[sub_resource type="Resource" id="Resource_v1wow"]
-script = ExtResource("4_mixcd")
-metadata/_custom_type_script = "uid://dn6pv21vjkypn"
 
 [node name="GameScene" type="Node2D" unique_id=312310118]
 script = ExtResource("1_mj2jn")
 
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=2007242987]
 unique_name_in_owner = true
+process_mode = 4
 position = Vector2(960, 540)
+
+[node name="Survive" type="Sprite2D" parent="." unique_id=1964489980]
+unique_name_in_owner = true
+z_index = -1
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("6_e35lh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448152598]
 unique_name_in_owner = true
@@ -221,7 +225,6 @@ theme_override_constants/margin_top = 16
 unique_name_in_owner = true
 visible = false
 mouse_filter = 0
-player_resource = SubResource("Resource_v1wow")
 
 [connection signal="timer_reached_zero" from="CanvasLayer/Timer" to="." method="_on_timer_timer_reached_zero"]
 [connection signal="next_level" from="LevelDownMenu" to="." method="_on_next_level"]

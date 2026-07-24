@@ -3,24 +3,16 @@ class_name Player
 
 @onready var sprite: Sprite2D = $Sprite2D
 
-signal armor_updated(amount: int)
-var resource: CharacterStatsResource
-var current_armor: int = 2
-
 const INVINCIBILITY_DURATION: float = 1.0
 var is_invincible: bool = false
 
 @export var speed: float = 600.0
 @onready var hit_box: Hitbox = %HitBox
 @onready var attack_cooldown: Timer = %Cooldown
-const ATTACK_DURATION: float = 0.3
+const ATTACK_DURATION: float = 0.2
 
 var knockback_velocity: Vector2 = Vector2.ZERO
 const KNOCKBACK_POWER: float = 1200
-
-func set_resource(player_resource: CharacterStatsResource) -> void:
-	resource = player_resource
-	current_armor = player_resource.armor
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -59,10 +51,10 @@ func receive_attack(hitbox: Hitbox) -> void:
 	take_damage()
 
 func take_damage() -> void:
-	if current_armor == 0:
+	if PlayerStats.current_armor == 0:
 		print("defeat")
-	current_armor -= 1
-	armor_updated.emit(current_armor)
+	PlayerStats.current_armor -= 1
+	PlayerStats.armor_updated.emit(PlayerStats.current_armor)
 
 func start_invincibility() -> void:
 	is_invincible = true
