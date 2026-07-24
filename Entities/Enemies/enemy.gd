@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var sprite: Sprite2D = %Sprite
+
 @export var health: int = 3
 @export var speed: float = 400.0
 var knockback_velocity: Vector2 = Vector2.ZERO
@@ -20,6 +22,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		var direction: Vector2 = (player.global_position - global_position).normalized()
 		velocity = direction * speed
+	if velocity.x != 0:
+		sprite.flip_h = velocity.x < 0
 	move_and_slide()
 
 func take_damage(amount: int) -> void:

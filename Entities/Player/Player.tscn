@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cx5ghr7oecywv"]
 
 [ext_resource type="Script" uid="uid://dhk5324fslcmn" path="res://Entities/Player/player.gd" id="1_q3lat"]
-[ext_resource type="Texture2D" uid="uid://curnselommeqd" path="res://Assets/caca.png" id="2_q3lat"]
+[ext_resource type="Texture2D" uid="uid://cu4exy0acmipj" path="res://Assets/Characters/Bell0w.png" id="2_1des2"]
 [ext_resource type="Script" uid="uid://cen50wtf211c1" path="res://Entities/hurtbox.gd" id="2_vweq0"]
 [ext_resource type="Script" uid="uid://bdptp85u1de4u" path="res://Entities/hitbox.gd" id="4_1des2"]
 
@@ -18,7 +18,7 @@ script = ExtResource("1_q3lat")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1791162566]
 scale = Vector2(4, 4)
-texture = ExtResource("2_q3lat")
+texture = ExtResource("2_1des2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=377639271]
 shape = SubResource("RectangleShape2D_h8c8n")
@@ -42,6 +42,7 @@ collision_mask = 0
 monitoring = false
 monitorable = false
 script = ExtResource("4_1des2")
+isPlayer = true
 metadata/_custom_type_script = "uid://bdptp85u1de4u"
 
 [node name="ColorRect" type="ColorRect" parent="Attacks/HitBox" unique_id=770794530]
@@ -56,4 +57,5 @@ shape = SubResource("RectangleShape2D_vepnw")
 
 [node name="Cooldown" type="Timer" parent="Attacks" unique_id=1119776947]
 unique_name_in_owner = true
+wait_time = 0.5
 one_shot = true

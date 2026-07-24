@@ -6,7 +6,7 @@ class_name Player
 const INVINCIBILITY_DURATION: float = 1.0
 var is_invincible: bool = false
 
-@export var speed: float = 600.0
+@export var speed: float = 300.0
 @onready var hit_box: Hitbox = %HitBox
 @onready var attack_cooldown: Timer = %Cooldown
 const ATTACK_DURATION: float = 0.2
@@ -29,9 +29,15 @@ func movement(delta: float) -> void:
 		input_vector = input_vector.normalized()
 		
 		velocity = input_vector * speed
+		if PlayerStats.resource.speed >= 0:
+			velocity *= PlayerStats.resource.speed
+	if velocity.x != 0:
+		sprite.flip_h = velocity.x < 0
 	move_and_slide()
 
 func attacking() -> void:
+	if PlayerStats.resource.strength == 0:
+		return
 	if Input.is_action_just_pressed("LMB") and attack_cooldown.is_stopped():
 		attack_cooldown.start()
 		hit_box.look_at(get_global_mouse_position())
