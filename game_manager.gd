@@ -7,9 +7,9 @@ var levels: Array[String] = [
 	"res://Maps/level-1.tscn"
 ]
 var timers: Array[int] = [
-	10,
-	15,
-	20
+	2,
+	2,
+	2
 ]
 
 
@@ -32,7 +32,6 @@ func new_stage() -> void:
 		push_error("No player found in current level")
 		return
 	player.armor_updated.connect(_on_player_armor_updated)
-
 	current_level.visible = true
 	current_level.process_mode = Node2D.PROCESS_MODE_INHERIT
 	canvas_layer.visible = true
@@ -40,8 +39,6 @@ func new_stage() -> void:
 
 func load_stage(index: int) -> void:
 	print("loading level ", index)
-	for child in current_level.get_children():
-		child.queue_free()
 	
 	var level_scene: PackedScene = load(levels[index])
 	var level_instance: Node = level_scene.instantiate()
@@ -62,6 +59,8 @@ func _on_player_armor_updated(amount: int) -> void:
 
 
 func _on_timer_timer_reached_zero() -> void:
+	for child in current_level.get_children():
+		child.queue_free()
 	current_level.visible = false
 	current_level.process_mode = Node2D.PROCESS_MODE_DISABLED
 	canvas_layer.visible = false

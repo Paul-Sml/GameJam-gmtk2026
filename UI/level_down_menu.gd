@@ -11,6 +11,8 @@ var saved_player_resource: CharacterStatsResource
 @onready var speed_button: TextureButton = $Menuing/VBoxContainer2/Speed/TickableCounter/SpeedButton
 @onready var remaining_points_texture: TextureRect = %TextureRect3
 
+var can_skip: bool = false
+
 #func _ready() -> void:
 	#var resource = CharacterStatsResource.new()
 	#resource.level_down()
@@ -20,13 +22,15 @@ func level_down() -> void:
 	print("level down")
 	player_resource.level_down()
 	level_down_transi.visible = true
+	get_tree().create_timer(1.0).timeout.connect(func(): can_skip = true)
 	#level_down_transi.disabled = false
 	saved_player_resource = player_resource.duplicate(true)
 	update_visuals()
 	visible = true
 
 func _on_level_down_transi_pressed() -> void:
-	level_down_transi.visible = false
+	if can_skip:
+		level_down_transi.visible = false
 	#level_down_transi.disabled = true
 
 func close_menu() -> void:
@@ -93,4 +97,5 @@ func _on_validate_pressed() -> void:
 		return
 	next_level.emit()
 	#current_level.visible = true
+	can_skip = false
 	close_menu()
