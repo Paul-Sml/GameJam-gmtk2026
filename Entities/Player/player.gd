@@ -41,7 +41,6 @@ func movement(delta: float) -> void:
 
 func attacking() -> void:
 	if Input.is_action_just_pressed("LMB") and attack_cooldown.is_stopped():
-		print("attack")
 		attack_cooldown.start()
 		hit_box.look_at(get_global_mouse_position())
 		hit_box.visible = true

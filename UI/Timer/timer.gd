@@ -5,26 +5,26 @@ extends Control
 
 signal timer_reached_zero
 
-@export var max_time:int = 15
+@export var max_time: int = 15
 var remaining_time: int:
 	set(value):
 		remaining_time = value
 		if remaining_time == 0:
-			_self_timer_finished()
-
-func _self_timer_finished() -> void:
-	timer_reached_zero.emit()
-
-func _on_timer_timeout() -> void:
-	remaining_time -= 1
-	updateValue()
+			timer.stop()
+			timer_reached_zero.emit()
 
 func _ready() -> void:
 	remaining_time = max_time
 	updateValue()
 
+func start_timer(time: int) -> void:
+	remaining_time = time
+	updateValue()
+	timer.start()
+
 func updateValue() -> void:
 	label.text = str(remaining_time)
 
-func _on_next_level() -> void:
-	remaining_time = max_time
+func _on_timer_timeout() -> void:
+	remaining_time -= 1
+	updateValue()

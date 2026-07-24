@@ -21,12 +21,15 @@ position = Vector2(960, 540)
 [node name="Testlevel" parent="CurrentLevel" unique_id=1901868416 instance=ExtResource("1_po0ka")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448152598]
+unique_name_in_owner = true
 
 [node name="Timer" parent="CanvasLayer" unique_id=1613158427 instance=ExtResource("1_mlf6e")]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 20.0
 offset_bottom = 20.0
+mouse_filter = 2
+max_time = 2
 
 [node name="PlayerUI" type="Control" parent="CanvasLayer" unique_id=1515167098]
 layout_mode = 3
@@ -34,14 +37,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(4, 4)
+mouse_filter = 2
 
 [node name="ArmorIcons" type="HBoxContainer" parent="CanvasLayer/PlayerUI" unique_id=1682893839]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 5.0
-offset_top = 85.0
-offset_right = 85.0
-offset_bottom = 125.0
+offset_left = 51.75
+offset_top = 4.75
+offset_right = 131.75
+offset_bottom = 44.75
 theme_override_constants/separation = 16
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/PlayerUI/ArmorIcons" unique_id=374069472]
@@ -57,8 +61,10 @@ size_flags_vertical = 4
 texture = ExtResource("4_kdryc")
 
 [node name="LevelDownMenu" parent="." unique_id=2091781716 instance=ExtResource("3_v1wow")]
+unique_name_in_owner = true
 visible = false
+mouse_filter = 0
 player_resource = SubResource("Resource_v1wow")
 
-[connection signal="timer_reached_zero" from="CanvasLayer/Timer" to="LevelDownMenu" method="_on_timer_reached_zero"]
+[connection signal="timer_reached_zero" from="CanvasLayer/Timer" to="." method="_on_timer_timer_reached_zero"]
 [connection signal="next_level" from="LevelDownMenu" to="CanvasLayer/Timer" method="_on_next_level"]

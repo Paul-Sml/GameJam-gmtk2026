@@ -18,18 +18,20 @@ normal = Vector2(1, 0)
 
 [node name="Player" parent="." unique_id=815963282 instance=ExtResource("2_pfo1v")]
 
-[node name="Enemy" parent="." unique_id=711083395 instance=ExtResource("4_pfo1v")]
-position = Vector2(693, 410)
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=913770846]
 
-[node name="Enemy2" parent="." unique_id=834090440 instance=ExtResource("4_pfo1v")]
+[node name="Enemies" type="Node2D" parent="." unique_id=2048646103]
+
+[node name="Enemy" parent="Enemies" unique_id=711083395 instance=ExtResource("4_pfo1v")]
+position = Vector2(693, 410)
+
+[node name="Enemy2" parent="Enemies" unique_id=834090440 instance=ExtResource("4_pfo1v")]
 position = Vector2(-742, 281)
 
-[node name="Enemy3" parent="." unique_id=13938878 instance=ExtResource("4_pfo1v")]
+[node name="Enemy3" parent="Enemies" unique_id=13938878 instance=ExtResource("4_pfo1v")]
 position = Vector2(-785, -298)
 
-[node name="Enemy4" parent="." unique_id=436715531 instance=ExtResource("4_pfo1v")]
+[node name="Enemy4" parent="Enemies" unique_id=436715531 instance=ExtResource("4_pfo1v")]
 position = Vector2(511, -209)
 
 [node name="ScreenBorder" type="Node2D" parent="." unique_id=365184777]
