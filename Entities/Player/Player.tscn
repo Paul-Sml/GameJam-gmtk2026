@@ -9,7 +9,7 @@
 size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vepnw"]
-size = Vector2(184, 128)
+size = Vector2(224, 160)
 
 [node name="Player" type="CharacterBody2D" unique_id=815963282 groups=["player"]]
 z_index = 1
@@ -46,12 +46,12 @@ metadata/_custom_type_script = "uid://bdptp85u1de4u"
 
 [node name="ColorRect" type="ColorRect" parent="Attacks/HitBox" unique_id=770794530]
 offset_left = 52.0
-offset_top = -64.0
-offset_right = 236.0
-offset_bottom = 64.0
+offset_top = -80.0
+offset_right = 276.0
+offset_bottom = 80.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HitBox" unique_id=73418741]
-position = Vector2(144, 0)
+position = Vector2(164, 0)
 shape = SubResource("RectangleShape2D_vepnw")
 
 [node name="Cooldown" type="Timer" parent="Attacks" unique_id=1119776947]

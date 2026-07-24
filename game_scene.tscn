@@ -1,27 +1,24 @@
 [gd_scene format=3 uid="uid://whoqxqpfyj37"]
 
+[ext_resource type="Script" uid="uid://c8el6ix1m6vux" path="res://game_manager.gd" id="1_mj2jn"]
 [ext_resource type="PackedScene" uid="uid://do8qr8om2w3yh" path="res://UI/Timer/timer.tscn" id="1_mlf6e"]
 [ext_resource type="PackedScene" uid="uid://tojyqnljvix0" path="res://Maps/testlevel.tscn" id="1_po0ka"]
 [ext_resource type="PackedScene" uid="uid://cqk7qvvfkqgfr" path="res://UI/level_down_menu.tscn" id="3_v1wow"]
+[ext_resource type="Texture2D" uid="uid://dltodj6c2ycd1" path="res://Assets/LevelDownMenu/stat_icon_armor.png" id="4_kdryc"]
 [ext_resource type="Script" uid="uid://dn6pv21vjkypn" path="res://Entities/Player/PlayerStats/CharStatsResource.gd" id="4_mixcd"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_po0ka"]
-bg_color = Color(0.32156864, 0.28627452, 0.34117648, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1wow"]
-bg_color = Color(0.85882354, 0.87058824, 1, 1)
 
 [sub_resource type="Resource" id="Resource_v1wow"]
 script = ExtResource("4_mixcd")
 metadata/_custom_type_script = "uid://dn6pv21vjkypn"
 
 [node name="GameScene" type="Node2D" unique_id=312310118]
+script = ExtResource("1_mj2jn")
 
-[node name="Level" type="Node2D" parent="." unique_id=2007242987]
+[node name="CurrentLevel" type="Node2D" parent="." unique_id=2007242987]
 unique_name_in_owner = true
 position = Vector2(960, 540)
 
-[node name="Testlevel" parent="Level" unique_id=1901868416 instance=ExtResource("1_po0ka")]
+[node name="Testlevel" parent="CurrentLevel" unique_id=1901868416 instance=ExtResource("1_po0ka")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448152598]
 
@@ -36,36 +33,28 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(4, 4)
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/PlayerUI" unique_id=1321607052]
-custom_minimum_size = Vector2(320, 16)
+[node name="ArmorIcons" type="HBoxContainer" parent="CanvasLayer/PlayerUI" unique_id=1682893839]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 20.0
-offset_top = 347.0
-offset_right = 340.0
-offset_bottom = 374.0
-theme_override_styles/background = SubResource("StyleBoxFlat_po0ka")
-theme_override_styles/fill = SubResource("StyleBoxFlat_v1wow")
-max_value = 3.0
-step = 1.0
-value = 2.0
-show_percentage = false
+offset_left = 5.0
+offset_top = 85.0
+offset_right = 85.0
+offset_bottom = 125.0
+theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="CanvasLayer/PlayerUI/ProgressBar" unique_id=1497549145]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = 1
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 18
-text = "2  /  3"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PlayerUI/ArmorIcons" unique_id=374069472]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_kdryc")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PlayerUI/ArmorIcons" unique_id=443196683]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_kdryc")
 
 [node name="LevelDownMenu" parent="." unique_id=2091781716 instance=ExtResource("3_v1wow")]
 visible = false
