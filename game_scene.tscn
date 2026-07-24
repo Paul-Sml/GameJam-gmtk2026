@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cqk7qvvfkqgfr" path="res://UI/level_down_menu.tscn" id="3_v1wow"]
 [ext_resource type="Texture2D" uid="uid://dltodj6c2ycd1" path="res://Assets/LevelDownMenu/stat_icon_armor.png" id="4_kdryc"]
 [ext_resource type="Script" uid="uid://dn6pv21vjkypn" path="res://Entities/Player/PlayerStats/CharStatsResource.gd" id="4_mixcd"]
+[ext_resource type="Texture2D" uid="uid://b1yysssaxylsf" path="res://Assets/LevelDownMenu/stat_holder.png" id="5_e35lh"]
+[ext_resource type="Texture2D" uid="uid://dtchdch4nigm1" path="res://Assets/LevelDownMenu/stat_button.png" id="6_udeyl"]
 
 [sub_resource type="Resource" id="Resource_v1wow"]
 script = ExtResource("4_mixcd")
@@ -42,11 +44,11 @@ mouse_filter = 2
 [node name="ArmorIcons" type="HBoxContainer" parent="CanvasLayer/PlayerUI" unique_id=1682893839]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 51.75
+offset_left = 62.0
 offset_top = 4.75
-offset_right = 131.75
+offset_right = 142.0
 offset_bottom = 44.75
-theme_override_constants/separation = 16
+theme_override_constants/separation = 8
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/PlayerUI/ArmorIcons" unique_id=374069472]
 layout_mode = 2
@@ -59,6 +61,163 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("4_kdryc")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PlayerUI" unique_id=1556402924]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 372.0
+offset_right = 440.0
+offset_bottom = 184.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer" unique_id=1537979256]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Armor" type="HBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1283895023]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1036092823]
+layout_mode = 2
+texture = ExtResource("4_kdryc")
+stretch_mode = 2
+
+[node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1789835924]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StatHolder" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1518564696]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_e35lh")
+stretch_mode = 2
+
+[node name="ArmorLabel" type="Label" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter/StatHolder" unique_id=1828946605]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArmorButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1940965894]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_udeyl")
+
+[node name="Strength" type="HBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1607979713]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength" unique_id=695645616]
+layout_mode = 2
+texture = ExtResource("4_kdryc")
+stretch_mode = 2
+
+[node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength" unique_id=1054011288]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StatHolder" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter" unique_id=600461116]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_e35lh")
+stretch_mode = 2
+
+[node name="StrengthLabel" type="Label" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter/StatHolder" unique_id=1388205001]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StrengthButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter" unique_id=855977829]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_udeyl")
+
+[node name="Speed" type="HBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1886386486]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed" unique_id=921304977]
+layout_mode = 2
+texture = ExtResource("4_kdryc")
+stretch_mode = 2
+
+[node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed" unique_id=1175796332]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StatHolder" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter" unique_id=500910210]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_e35lh")
+stretch_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter/StatHolder" unique_id=579611457]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter" unique_id=783980608]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_udeyl")
+
+[node name="AllStats" type="MarginContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1416308710]
+layout_mode = 2
+theme_override_constants/margin_top = 16
 
 [node name="LevelDownMenu" parent="." unique_id=2091781716 instance=ExtResource("3_v1wow")]
 unique_name_in_owner = true

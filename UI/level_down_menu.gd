@@ -9,6 +9,7 @@ var saved_player_resource: CharacterStatsResource
 @onready var armor_button: TextureButton = $Menuing/VBoxContainer2/Armor/TickableCounter/ArmorButton
 @onready var strength_button: TextureButton = $Menuing/VBoxContainer2/Strength/TickableCounter/StrengthButton
 @onready var speed_button: TextureButton = $Menuing/VBoxContainer2/Speed/TickableCounter/SpeedButton
+@onready var remaining_points_texture: TextureRect = %TextureRect3
 
 #func _ready() -> void:
 	#var resource = CharacterStatsResource.new()
@@ -85,8 +86,11 @@ func _on_reset_pressed() -> void:
 	update_visuals()
 
 func _on_validate_pressed() -> void:
-	if player_resource.points_remaining > 0:
+	if player_resource.points_remaining < 0:
+		remaining_points_texture.modulate = Color(1, 0.2, 0.2, 1)
+		await get_tree().create_timer(1).timeout
+		remaining_points_texture.modulate = Color(1, 1, 1, 1)
 		return
-	#next_level.emit()
+	next_level.emit()
 	#current_level.visible = true
-	#close_menu()
+	close_menu()
