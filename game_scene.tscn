@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c8el6ix1m6vux" path="res://game_manager.gd" id="1_mj2jn"]
 [ext_resource type="PackedScene" uid="uid://do8qr8om2w3yh" path="res://UI/Timer/timer.tscn" id="1_mlf6e"]
 [ext_resource type="PackedScene" uid="uid://cqk7qvvfkqgfr" path="res://UI/level_down_menu.tscn" id="3_v1wow"]
+[ext_resource type="Texture2D" uid="uid://doixyltdr5vk2" path="res://Assets/LevelDownMenu/ShieldIcon.png" id="4_miq82"]
 [ext_resource type="Texture2D" uid="uid://db43y5yw30l58" path="res://Assets/LevelDownMenu/Icon2.png" id="4_udeyl"]
 [ext_resource type="Texture2D" uid="uid://b1yysssaxylsf" path="res://Assets/LevelDownMenu/stat_holder.png" id="5_e35lh"]
 [ext_resource type="Texture2D" uid="uid://bjyyj5wn6ft8s" path="res://Assets/LevelDownMenu/Icon1.png" id="5_miq82"]
@@ -28,7 +29,6 @@ texture = ExtResource("6_e35lh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448152598]
 unique_name_in_owner = true
-visible = false
 
 [node name="Timer" parent="CanvasLayer" unique_id=1613158427 instance=ExtResource("1_mlf6e")]
 unique_name_in_owner = true
@@ -59,13 +59,13 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_udeyl")
+texture = ExtResource("4_miq82")
 
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PlayerUI/ArmorIcons" unique_id=443196683]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_udeyl")
+texture = ExtResource("4_miq82")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PlayerUI" unique_id=1556402924]
 layout_mode = 1

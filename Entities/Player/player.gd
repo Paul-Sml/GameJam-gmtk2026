@@ -6,6 +6,8 @@ class_name Player
 const INVINCIBILITY_DURATION: float = 1.0
 var is_invincible: bool = false
 
+const BLACKHOLE = preload("uid://c0cwug6l61ynw")
+
 @export var speed: float = 300.0
 @onready var hit_box: Hitbox = %HitBox
 @onready var attack_cooldown: Timer = %Cooldown
@@ -14,23 +16,67 @@ const ATTACK_DURATION: float = 0.1
 var knockback_velocity: Vector2 = Vector2.ZERO
 const KNOCKBACK_POWER: float = 1200
 
+const NEG_SPEED_MULTIPLIER: float = -3.0
+
 func _physics_process(delta: float) -> void:
 	movement(delta)
 	attacking()
+
+#func movement(delta: float) -> void:
+	#if knockback_velocity.length() > 0:
+		#knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 3000 * delta)
+		#velocity = knockback_velocity
+	#elif PlayerStats.resource.speed > 0:
+		#var input_vector := Vector2.ZERO
+		#input_vector.x = Input.get_axis("left", "right")
+		#input_vector.y = Input.get_axis("up", "down")
+		#input_vector = input_vector.normalized()
+#
+		#var player_speed: float = PlayerStats.resource.speed
+		#velocity = input_vector * speed * abs(player_speed)
+	#elif PlayerStats.resource.speed < 0:
+		#velocity = Vector2.ZERO
+		#handle_teleport()
+#
+	#if velocity.x != 0:
+		#sprite.flip_h = velocity.x < 0
+		#%Sprite2D2.flip_h = velocity.x < 0
+		#if velocity.x < 0:
+			#%Sprite2D2.position.x = abs(%Sprite2D2.position.x) * -1
+		#else:
+			#%Sprite2D2.position.x = abs(%Sprite2D2.position.x)
+	#move_and_slide()
+
+var teleport_distance_max: float:
+	get:
+		return 1000.0 if PlayerStats.resource.speed == -2 else 600.0
+
+var teleport_charge_rate: float:
+	get:
+		return 1000.0 if PlayerStats.resource.speed == -2 else 600.0
+
+var is_charging_teleport: bool = false
+var teleport_hold_time: float = 0.0
+var teleport_direction: Vector2 = Vector2.ZERO
+var teleport_ghost: Sprite2D = null
+
 
 func movement(delta: float) -> void:
 	if knockback_velocity.length() > 0:
 		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 3000 * delta)
 		velocity = knockback_velocity
-	else:
+	elif PlayerStats.resource.speed > 0:
 		var input_vector := Vector2.ZERO
 		input_vector.x = Input.get_axis("left", "right")
 		input_vector.y = Input.get_axis("up", "down")
 		input_vector = input_vector.normalized()
-		
-		velocity = input_vector * speed
-		if PlayerStats.resource.speed >= 0:
-			velocity *= PlayerStats.resource.speed
+
+		var player_speed: float = PlayerStats.resource.speed
+		velocity = input_vector * speed * abs(player_speed)
+	elif PlayerStats.resource.speed < 0:
+		velocity = Vector2.ZERO
+		handle_teleport_charge(delta)
+
 	if velocity.x != 0:
 		sprite.flip_h = velocity.x < 0
 		%Sprite2D2.flip_h = velocity.x < 0
@@ -40,19 +86,98 @@ func movement(delta: float) -> void:
 			%Sprite2D2.position.x = abs(%Sprite2D2.position.x)
 	move_and_slide()
 
+
+func handle_teleport_charge(delta: float) -> void:
+	var input_vector := Vector2.ZERO
+	input_vector.x = Input.get_axis("left", "right")
+	input_vector.y = Input.get_axis("up", "down")
+	input_vector = input_vector.normalized()
+
+	if input_vector != Vector2.ZERO:
+		if not is_charging_teleport:
+			start_teleport_charge(input_vector)
+		teleport_direction = input_vector
+		teleport_hold_time += delta
+		update_teleport_preview()
+	elif is_charging_teleport:
+		release_teleport()
+
+
+func start_teleport_charge(direction: Vector2) -> void:
+	is_charging_teleport = true
+	teleport_hold_time = 0.0
+	teleport_direction = direction
+
+	teleport_ghost = Sprite2D.new()
+	teleport_ghost.scale = Vector2(4,4)
+	teleport_ghost.texture = sprite.texture
+	teleport_ghost.hframes = sprite.hframes
+	teleport_ghost.vframes = sprite.vframes
+	teleport_ghost.frame = sprite.frame
+	teleport_ghost.modulate.a = 0.33
+	get_parent().add_child(teleport_ghost)
+
+
+func update_teleport_preview() -> void:
+	var charge_distance: float = min(teleport_hold_time * teleport_charge_rate, teleport_distance_max)
+	var target_position: Vector2 = get_safe_teleport_position(teleport_direction, charge_distance)
+
+	teleport_ghost.global_position = target_position
+	teleport_ghost.flip_h = teleport_direction.x < 0
+
+
+func release_teleport() -> void:
+	var origin_position: Vector2 = global_position
+
+	if teleport_ghost:
+		global_position = teleport_ghost.global_position
+	
+	if origin_position.distance_to(global_position) > 200:
+		spawn_blackhole(origin_position, PlayerStats.resource.speed)
+
+	is_charging_teleport = false
+	teleport_hold_time = 0.0
+
+	if teleport_ghost:
+		teleport_ghost.queue_free()
+		teleport_ghost = null
+
+
+func get_safe_teleport_position(direction: Vector2, distance: float) -> Vector2:
+	var step: float = 4.0
+	var remaining: float = distance
+
+	while remaining > 0:
+		var offset: Vector2 = direction * remaining
+		if not test_move(global_transform, offset):
+			return global_position + offset
+		remaining -= step
+
+	return global_position
+
 func attacking() -> void:
 	if PlayerStats.resource.strength == 0:
 		return
 	if Input.is_action_just_pressed("LMB") and attack_cooldown.is_stopped():
-		attack_cooldown.start()
 		hit_box.look_at(get_global_mouse_position())
-		hit_box.scale = Vector2(.5, .5) * PlayerStats.resource.strength
-		hit_box.visible = true
-		hit_box.monitorable = true
-		await get_tree().create_timer(ATTACK_DURATION).timeout # TODO : Real timer
-		hit_box.visible = false
-		hit_box.monitorable = false
+		if PlayerStats.resource.strength > 0:
+			hit_box.scale = Vector2(.5, .5) * PlayerStats.resource.strength
+			hit_box.visible = true
+			hit_box.monitorable = true
+			await get_tree().create_timer(ATTACK_DURATION).timeout # TODO : Real timer
+			hit_box.visible = false
+			hit_box.monitorable = false
+			attack_cooldown.start()
+		if PlayerStats.resource.strength < 0:
+			spawn_blackhole(get_global_mouse_position(), PlayerStats.resource.strength)
+			attack_cooldown.wait_time = 1.0
+			attack_cooldown.start()
 
+func spawn_blackhole(pos: Vector2, power: int) -> void:
+	var blackhole: Blackhole = BLACKHOLE.instantiate()
+	blackhole.global_position = pos
+	get_tree().current_scene.add_child(blackhole)
+	blackhole.set_power(abs(power))
 
 func receive_attack(hitbox: Hitbox) -> void:
 	if is_invincible:
@@ -65,7 +190,11 @@ func receive_attack(hitbox: Hitbox) -> void:
 func take_damage() -> void:
 	if PlayerStats.current_armor == 0:
 		print("defeat")
-	PlayerStats.current_armor -= 1
+	elif PlayerStats.current_armor > 0:
+		PlayerStats.current_armor -= 1
+	elif PlayerStats.current_armor < 0:
+		PlayerStats.current_armor += 1
+		spawn_blackhole(self.global_position, PlayerStats.resource.armor)
 	PlayerStats.armor_updated.emit(PlayerStats.current_armor)
 
 func start_invincibility() -> void:

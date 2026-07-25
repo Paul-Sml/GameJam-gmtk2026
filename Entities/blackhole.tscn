@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://c0cwug6l61ynw"]
+
+[ext_resource type="Script" uid="uid://cwc2m7bdeqojr" path="res://Entities/blackhole.gd" id="1_0klkp"]
+[ext_resource type="Texture2D" uid="uid://boh477rci3wp5" path="res://Assets/blackhole.png" id="1_e3pjd"]
+[ext_resource type="Script" uid="uid://bdptp85u1de4u" path="res://Entities/hitbox.gd" id="2_o1ixh"]
+[ext_resource type="Texture2D" uid="uid://7t37ga7mbljn" path="res://Assets/blackhole2.png" id="3_ndf6s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h8c8n"]
+radius = 16.0
+
+[node name="Blackhole" type="Node2D" unique_id=1399928071]
+scale = Vector2(4, 4)
+script = ExtResource("1_0klkp")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1312216944]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("1_e3pjd")
+
+[node name="Sprite2" type="Sprite2D" parent="." unique_id=2106535132]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("3_ndf6s")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=2133403061]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_o1ixh")
+damage = 99
+metadata/_custom_type_script = "uid://bdptp85u1de4u"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1134647607]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_h8c8n")
+
+[node name="Timer" type="Timer" parent="." unique_id=40372585]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

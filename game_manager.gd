@@ -73,11 +73,16 @@ func find_player_in_current_level() -> Player:
 			return player
 	return null
 
-func _on_player_armor_updated(amount: int) -> void:
-	print("Player armor updated: ", amount)
-	armor_icons.get_child(0).visible = amount >= 1
-	armor_icons.get_child(1).visible = amount >= 2
+const SHIELD_ICON = preload("uid://doixyltdr5vk2")
+const SHIELD_ICON_NEGATIVE = preload("uid://bd8avl68bwfl1")
 
+func _on_player_armor_updated(amount: int) -> void:
+	var icon: Texture2D = SHIELD_ICON_NEGATIVE if amount < 0 else SHIELD_ICON
+
+	for i in armor_icons.get_child_count():
+		var icon_node: TextureRect = armor_icons.get_child(i)
+		icon_node.texture = icon
+		icon_node.visible = abs(amount) >= i + 1
 
 func _on_timer_timer_reached_zero() -> void:
 	for child in current_level.get_children():

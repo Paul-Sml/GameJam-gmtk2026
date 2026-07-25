@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5eq1"]
 size = Vector2(128, 128)
 
-[node name="Enemy" type="CharacterBody2D" unique_id=711083395 groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=711083395 groups=["enemies"]]
 collision_layer = 8
 collision_mask = 8
 motion_mode = 1
