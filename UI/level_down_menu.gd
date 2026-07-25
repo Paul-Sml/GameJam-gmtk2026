@@ -5,10 +5,27 @@ signal next_level()
 
 var saved_player_resource: CharacterStatsResource
 @onready var level_down_transi: TextureButton = %LevelDownTransi
-@onready var armor_button: TextureButton = $Menuing/VBoxContainer2/Armor/TickableCounter/ArmorButton
-@onready var strength_button: TextureButton = $Menuing/VBoxContainer2/Strength/TickableCounter/StrengthButton
-@onready var speed_button: TextureButton = $Menuing/VBoxContainer2/Speed/TickableCounter/SpeedButton
 @onready var remaining_points_texture: TextureRect = %TextureRect3
+@onready var strength_button: TextureButton = %StrengthButton
+@onready var armor_button: TextureButton = %ArmorButton
+@onready var speed_button: TextureButton = %SpeedButton
+const BUTTON_NEG = preload("uid://da0y7rnb7y1x0")
+const BUTTON_NEG_PRESSED = preload("uid://ccy1ibmjqgyhg")
+const BUTTON_POS = preload("uid://cdn3hop83k8h4")
+const BUTTON_POS_PRESSED = preload("uid://biv2iyx4ebhnh")
+
+func set_buttons_textures() -> void:
+	set_button_textures(armor_button, PlayerStats.resource.armor)
+	set_button_textures(strength_button, PlayerStats.resource.strength)
+	set_button_textures(speed_button, PlayerStats.resource.speed)
+
+func set_button_textures(button: TextureButton, amount: int) -> void:
+	if amount > 0:
+		button.texture_normal = BUTTON_POS
+		button.texture_pressed = BUTTON_POS_PRESSED
+	else:
+		button.texture_normal = BUTTON_NEG
+		button.texture_pressed = BUTTON_NEG_PRESSED
 
 var can_skip: bool = false
 
@@ -37,47 +54,54 @@ func close_menu() -> void:
 
 @onready var level_label: Label = %LevelLabel
 @onready var points_label: Label = %PointsLabel
-@onready var armor_label: Label = %ArmorLabel
-@onready var strength_label: Label = %StrengthLabel
-@onready var speed_label: Label = %SpeedLabel
+@onready var armor_amount: TextureRect = %ArmorAmount
+@onready var strength_amount: TextureRect = %StrengthAmount
+@onready var speed_amount: TextureRect = %SpeedAmount
 
 func update_visuals() -> void:
 	level_label.text = str(PlayerStats.resource.level)
 	points_label.text = str(PlayerStats.resource.points_remaining)
-	armor_label.text = str(PlayerStats.resource.armor)
-	strength_label.text = str(PlayerStats.resource.strength)
-	speed_label.text = str(PlayerStats.resource.speed)
+	armor_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
+	strength_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)
+	speed_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.speed)
 	if PlayerStats.resource.points_remaining == 0:
 		visible_buttons(false)
 	else:
 		visible_buttons(true)
+		set_buttons_textures()
 
 func _on_armor_button_pressed() -> void:
 	if PlayerStats.resource.points_remaining < 0:
 		PlayerStats.resource.armor -= 1
-		armor_label.text = str(PlayerStats.resource.armor)
+		armor_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
 		PlayerStats.resource.points_remaining += 1
 		points_label.text = str(PlayerStats.resource.points_remaining)
 		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
+		else:
+			set_buttons_textures()
 
 func _on_strength_button_pressed() -> void:
 	if PlayerStats.resource.points_remaining < 0:
 		PlayerStats.resource.strength -= 1
-		strength_label.text = str(PlayerStats.resource.strength)
+		strength_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)
 		PlayerStats.resource.points_remaining += 1
 		points_label.text = str(PlayerStats.resource.points_remaining)
 		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
+		else:
+			set_buttons_textures()
 
 func _on_speed_button_pressed() -> void:
 	if PlayerStats.resource.points_remaining < 0:
 		PlayerStats.resource.speed -= 1
-		speed_label.text = str(PlayerStats.resource.speed)
+		speed_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.speed)
 		PlayerStats.resource.points_remaining += 1
 		points_label.text = str(PlayerStats.resource.points_remaining)
 		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
+		else:
+			set_buttons_textures()
 
 func visible_buttons(_is_visible: bool) -> void:
 	armor_button.modulate = Color(1, 1, 1, 1 if _is_visible else 0)

@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://c8el6ix1m6vux" path="res://game_manager.gd" id="1_mj2jn"]
 [ext_resource type="PackedScene" uid="uid://do8qr8om2w3yh" path="res://UI/Timer/timer.tscn" id="1_mlf6e"]
 [ext_resource type="PackedScene" uid="uid://cqk7qvvfkqgfr" path="res://UI/level_down_menu.tscn" id="3_v1wow"]
-[ext_resource type="Texture2D" uid="uid://dltodj6c2ycd1" path="res://Assets/LevelDownMenu/stat_icon_armor.png" id="4_kdryc"]
+[ext_resource type="Texture2D" uid="uid://db43y5yw30l58" path="res://Assets/LevelDownMenu/Icon2.png" id="4_udeyl"]
 [ext_resource type="Texture2D" uid="uid://b1yysssaxylsf" path="res://Assets/LevelDownMenu/stat_holder.png" id="5_e35lh"]
+[ext_resource type="Texture2D" uid="uid://bjyyj5wn6ft8s" path="res://Assets/LevelDownMenu/Icon1.png" id="5_miq82"]
 [ext_resource type="Texture2D" uid="uid://4iy3dio86avk" path="res://Assets/Other UI/survive_screen.png" id="6_e35lh"]
 [ext_resource type="Texture2D" uid="uid://dtchdch4nigm1" path="res://Assets/LevelDownMenu/stat_button.png" id="6_udeyl"]
+[ext_resource type="Texture2D" uid="uid://d4e7qup837qpe" path="res://Assets/LevelDownMenu/Icon3.png" id="8_j5hk1"]
 
 [node name="GameScene" type="Node2D" unique_id=312310118]
 script = ExtResource("1_mj2jn")
@@ -14,6 +16,7 @@ script = ExtResource("1_mj2jn")
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=2007242987]
 unique_name_in_owner = true
 process_mode = 4
+visible = false
 position = Vector2(960, 540)
 
 [node name="Survive" type="Sprite2D" parent="." unique_id=1964489980]
@@ -25,6 +28,7 @@ texture = ExtResource("6_e35lh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448152598]
 unique_name_in_owner = true
+visible = false
 
 [node name="Timer" parent="CanvasLayer" unique_id=1613158427 instance=ExtResource("1_mlf6e")]
 unique_name_in_owner = true
@@ -55,13 +59,13 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_kdryc")
+texture = ExtResource("4_udeyl")
 
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PlayerUI/ArmorIcons" unique_id=443196683]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_kdryc")
+texture = ExtResource("4_udeyl")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PlayerUI" unique_id=1556402924]
 layout_mode = 1
@@ -82,51 +86,6 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Armor" type="HBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1283895023]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1036092823]
-layout_mode = 2
-texture = ExtResource("4_kdryc")
-stretch_mode = 2
-
-[node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1789835924]
-propagate_maximum_size = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-
-[node name="StatHolder" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1518564696]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("5_e35lh")
-stretch_mode = 2
-
-[node name="ArmorLabel" type="Label" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter/StatHolder" unique_id=1828946605]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ArmorButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1940965894]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 16)
-custom_maximum_size = Vector2(-1, 16)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("6_udeyl")
-
 [node name="Strength" type="HBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1607979713]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -134,7 +93,7 @@ size_flags_vertical = 4
 
 [node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength" unique_id=695645616]
 layout_mode = 2
-texture = ExtResource("4_kdryc")
+texture = ExtResource("5_miq82")
 stretch_mode = 2
 
 [node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength" unique_id=1054011288]
@@ -144,26 +103,49 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="StatHolder" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter" unique_id=600461116]
+[node name="StrengthAmt" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter" unique_id=600461116]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_e35lh")
 stretch_mode = 2
 
-[node name="StrengthLabel" type="Label" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter/StatHolder" unique_id=1388205001]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="StrengthButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter" unique_id=855977829]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_udeyl")
+
+[node name="Armor" type="HBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1283895023]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1036092823]
+layout_mode = 2
+texture = ExtResource("4_udeyl")
+stretch_mode = 2
+
+[node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1789835924]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="ArmorAmt" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1518564696]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_e35lh")
+stretch_mode = 2
+
+[node name="ArmorButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1940965894]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 16)
 custom_maximum_size = Vector2(-1, 16)
@@ -179,7 +161,7 @@ size_flags_vertical = 4
 
 [node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed" unique_id=921304977]
 layout_mode = 2
-texture = ExtResource("4_kdryc")
+texture = ExtResource("8_j5hk1")
 stretch_mode = 2
 
 [node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed" unique_id=1175796332]
@@ -189,24 +171,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="StatHolder" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter" unique_id=500910210]
+[node name="SpeedAmt" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter" unique_id=500910210]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_e35lh")
 stretch_mode = 2
-
-[node name="SpeedLabel" type="Label" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter/StatHolder" unique_id=579611457]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="SpeedButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter" unique_id=783980608]
 modulate = Color(1, 1, 1, 0)

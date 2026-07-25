@@ -12,9 +12,9 @@ var timers: Array[int] = [
 	5
 ]
 
-@onready var armor_label: Label = %ArmorLabel
-@onready var strength_label: Label = %StrengthLabel
-@onready var speed_label: Label = %SpeedLabel
+@onready var armor_amt: TextureRect = %ArmorAmt
+@onready var strength_amt: TextureRect = %StrengthAmt
+@onready var speed_amt: TextureRect = %SpeedAmt
 
 @onready var current_level: Node2D = %CurrentLevel
 @onready var canvas_layer: CanvasLayer = %CanvasLayer
@@ -32,10 +32,10 @@ func new_stage() -> void:
 	print("new level !")
 	load_stage(level_id)
 	
-	armor_label.text = str(PlayerStats.resource.armor)
-	strength_label.text = str(PlayerStats.resource.strength)
-	speed_label.text = str(PlayerStats.resource.speed)
-	
+	armor_amt.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
+	strength_amt.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)
+	speed_amt.texture = PlayerStats.stats_points.get(PlayerStats.resource.speed)
+
 	survive.visible = true
 	await wait_for_input()
 	survive.visible = false

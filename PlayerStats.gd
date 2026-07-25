@@ -1,5 +1,13 @@
 extends Node
 
+var stats_points: Dictionary[int, CompressedTexture2D] = {
+	2: preload("res://Assets/LevelDownMenu/StatLvl2.png"),
+	1: preload("res://Assets/LevelDownMenu/StatLvl1.png"),
+	0: preload("res://Assets/LevelDownMenu/StatLvl0.png"),
+	-1: preload("res://Assets/LevelDownMenu/StatLvl-1.png"),
+	-2: preload("res://Assets/LevelDownMenu/StatLvl-2.png"),
+}
+
 signal armor_updated(amount: int)
 	
 @onready var resource: CharacterStatsResource = CharacterStatsResource.new()
