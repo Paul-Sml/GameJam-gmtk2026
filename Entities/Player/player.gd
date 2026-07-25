@@ -9,7 +9,7 @@ var is_invincible: bool = false
 @export var speed: float = 300.0
 @onready var hit_box: Hitbox = %HitBox
 @onready var attack_cooldown: Timer = %Cooldown
-const ATTACK_DURATION: float = 0.2
+const ATTACK_DURATION: float = 0.1
 
 var knockback_velocity: Vector2 = Vector2.ZERO
 const KNOCKBACK_POWER: float = 1200
@@ -41,6 +41,7 @@ func attacking() -> void:
 	if Input.is_action_just_pressed("LMB") and attack_cooldown.is_stopped():
 		attack_cooldown.start()
 		hit_box.look_at(get_global_mouse_position())
+		hit_box.scale = Vector2(.5, .5) * PlayerStats.resource.strength
 		hit_box.visible = true
 		hit_box.monitorable = true
 		await get_tree().create_timer(ATTACK_DURATION).timeout # TODO : Real timer

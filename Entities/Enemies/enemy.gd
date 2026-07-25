@@ -33,6 +33,6 @@ func take_damage(amount: int) -> void:
 
 func receive_attack(hitbox: Hitbox) -> void:
 	var knockback_direction: Vector2 = Vector2.RIGHT.rotated(hitbox.rotation)
-	knockback_velocity = knockback_direction * KNOCKBACK_POWER
+	knockback_velocity = knockback_direction * KNOCKBACK_POWER * (.5 * PlayerStats.resource.strength)
 	take_damage(hitbox.damage)
 	
