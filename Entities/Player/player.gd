@@ -33,6 +33,11 @@ func movement(delta: float) -> void:
 			velocity *= PlayerStats.resource.speed
 	if velocity.x != 0:
 		sprite.flip_h = velocity.x < 0
+		%Sprite2D2.flip_h = velocity.x < 0
+		if velocity.x < 0:
+			%Sprite2D2.position.x = abs(%Sprite2D2.position.x) * -1
+		else:
+			%Sprite2D2.position.x = abs(%Sprite2D2.position.x)
 	move_and_slide()
 
 func attacking() -> void:
