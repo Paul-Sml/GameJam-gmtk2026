@@ -49,6 +49,7 @@ script = ExtResource("1_vd1o1")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=913770846]
 
 [node name="Enemies" type="Node2D" parent="." unique_id=11671520]
+visible = false
 position = Vector2(121, 121)
 
 [node name="Turret" parent="Enemies" unique_id=711083395 instance=ExtResource("2_8bftq")]
@@ -70,7 +71,10 @@ position = Vector2(-1017, -121)
 process_mode = 4
 
 [node name="Enemy9" parent="Wave2" unique_id=1993288384 instance=ExtResource("2_drhl5")]
-position = Vector2(-576, 0)
+position = Vector2(-512, 0)
+
+[node name="Enemy11" parent="Wave2" unique_id=426720974 instance=ExtResource("2_drhl5")]
+position = Vector2(-896, 0)
 
 [node name="Enemy10" parent="Wave2" unique_id=959553347 instance=ExtResource("2_drhl5")]
 position = Vector2(704, 256)
