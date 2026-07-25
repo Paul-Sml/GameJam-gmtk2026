@@ -65,7 +65,7 @@ func close_menu() -> void:
 
 func update_visuals() -> void:
 	level_label.text = level_label.text.substr(0, level_label.text.length() - 1) + str(PlayerStats.resource.level)
-	remaining_points_texture.texture = PlayerStats.stats_points.get(PlayerStats.resource.points_remaining)
+	remaining_points_texture.texture = PlayerStats.pta.get(PlayerStats.resource.points_remaining)
 	armor_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
 	strength_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)
 	speed_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.speed)
@@ -80,7 +80,7 @@ func _on_armor_button_pressed() -> void:
 		PlayerStats.resource.armor -= 1
 		armor_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
 		PlayerStats.resource.points_remaining += 1
-		remaining_points_texture.texture = PlayerStats.stats_points.get(PlayerStats.resource.points_remaining)
+		remaining_points_texture.texture = PlayerStats.pta.get(PlayerStats.resource.points_remaining)
 		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
 		else:
@@ -91,7 +91,7 @@ func _on_strength_button_pressed() -> void:
 		PlayerStats.resource.strength -= 1
 		strength_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)
 		PlayerStats.resource.points_remaining += 1
-		remaining_points_texture.texture = PlayerStats.stats_points.get(PlayerStats.resource.points_remaining)
+		remaining_points_texture.texture = PlayerStats.pta.get(PlayerStats.resource.points_remaining)
 		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
 		else:
@@ -102,7 +102,7 @@ func _on_speed_button_pressed() -> void:
 		PlayerStats.resource.speed -= 1
 		speed_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.speed)
 		PlayerStats.resource.points_remaining += 1
-		remaining_points_texture.texture = PlayerStats.stats_points.get(PlayerStats.resource.points_remaining)
+		remaining_points_texture.texture = PlayerStats.pta.get(PlayerStats.resource.points_remaining)
 		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
 		else:

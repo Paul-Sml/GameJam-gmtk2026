@@ -74,6 +74,6 @@ func start_wave_3() -> void:
 	for indicator in indicators:
 		indicator.queue_free()
 	
-	for enemy in enemy_nodes:
+	for enemy in enemy_nodes3:
 		enemy.visible = true
 		wave3.process_mode = Node.PROCESS_MODE_INHERIT

@@ -15,6 +15,12 @@ var player_level: Dictionary[int, CompressedTexture2D] = {
 	-3: preload("res://Assets/LevelDownMenu/Level_Numbers/Level-3.png")
 }
 
+var pta: Dictionary[int, CompressedTexture2D] = {
+	0: preload("res://Assets/LevelDownMenu/PTAPurple0.png"),
+	-1: preload("res://Assets/LevelDownMenu/PTAPurple1.png"),
+	-2: preload("res://Assets/LevelDownMenu/PTAPurple2.png")
+}
+
 
 signal armor_updated(amount: int)
 	

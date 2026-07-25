@@ -105,24 +105,32 @@ navigation_polygon = SubResource("NavigationPolygon_4b8f5")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/ScreenBorder" unique_id=1928130586]
 position = Vector2(0, 540)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/ScreenBorder/StaticBody2D" unique_id=1443594738]
 shape = SubResource("WorldBoundaryShape2D_jn2qw")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D/ScreenBorder" unique_id=1167898614]
 position = Vector2(0, -540)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/ScreenBorder/StaticBody2D2" unique_id=537754295]
 shape = SubResource("WorldBoundaryShape2D_pbt4w")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="NavigationRegion2D/ScreenBorder" unique_id=1918552783]
 position = Vector2(960, 0)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/ScreenBorder/StaticBody2D3" unique_id=1133784017]
 shape = SubResource("WorldBoundaryShape2D_gw2tx")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="NavigationRegion2D/ScreenBorder" unique_id=175926912]
 position = Vector2(-960, 0)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/ScreenBorder/StaticBody2D4" unique_id=157837931]
 shape = SubResource("WorldBoundaryShape2D_hsehr")
@@ -209,3 +217,6 @@ autostart = true
 wait_time = 17.5
 one_shot = true
 autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="start_wave_2"]
+[connection signal="timeout" from="Timer2" to="." method="start_wave_3"]

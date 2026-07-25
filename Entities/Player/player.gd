@@ -175,15 +175,15 @@ func attacking() -> void:
 	if Input.is_action_just_pressed("LMB") and attack_cooldown.is_stopped():
 		hit_box.look_at(get_global_mouse_position())
 		if PlayerStats.resource.strength == 0:
-			pass
-		if PlayerStats.resource.strength > 0:
-			hit_box.scale = Vector2(.66, .66) * PlayerStats.resource.strength
-			hit_box.visible = true
-			hit_box.monitorable = true
-			await get_tree().create_timer(ATTACK_DURATION).timeout # TODO : Real timer
-			hit_box.visible = false
-			hit_box.monitorable = false
-			attack_cooldown.start()
+			#Clignotage
+			return
+		hit_box.scale = Vector2(.75, .75) * abs(PlayerStats.resource.strength)
+		hit_box.visible = true
+		hit_box.monitorable = true
+		await get_tree().create_timer(ATTACK_DURATION).timeout # TODO : Real timer
+		hit_box.visible = false
+		hit_box.monitorable = false
+		attack_cooldown.start()
 		# if PlayerStats.resource.strength < 0:
 		# 	spawn_blackhole(get_global_mouse_position(), PlayerStats.resource.strength)
 		# 	attack_cooldown.wait_time = 1.0

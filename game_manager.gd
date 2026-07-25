@@ -14,8 +14,8 @@ var levels: Array[String] = [
 ]
 var timers: Array[int] = [
 	1,
-	1,
-	20
+	2,
+	30
 ]
 
 @onready var armor_amt: TextureRect = %ArmorAmt
