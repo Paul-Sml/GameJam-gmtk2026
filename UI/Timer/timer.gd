@@ -13,9 +13,11 @@ var remaining_time: int:
 			timer.stop()
 			timer_reached_zero.emit()
 
-func start_timer(time: int) -> void:
+func set_timer(time:int) -> void:
 	remaining_time = time
 	updateValue()
+
+func start_timer() -> void:
 	timer.start()
 
 func updateValue() -> void:

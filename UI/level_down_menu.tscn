@@ -1,18 +1,79 @@
 [gd_scene format=3 uid="uid://cqk7qvvfkqgfr"]
 
 [ext_resource type="Script" uid="uid://cjwhw5jj5h5uh" path="res://UI/level_down_menu.gd" id="1_2k3c1"]
-[ext_resource type="Texture2D" uid="uid://cfjukk86i2sek" path="res://Assets/LevelDownMenu/leveldown_screen.png" id="2_2k3c1"]
-[ext_resource type="Texture2D" uid="uid://b0j7i1le4irrj" path="res://Assets/LevelDownMenu/level.png" id="2_dwoxl"]
 [ext_resource type="Texture2D" uid="uid://sf23pc5djbh3" path="res://Assets/LevelDownMenu/DowngradeBlankMenu.png" id="2_rg21y"]
 [ext_resource type="Texture2D" uid="uid://bym645d1o5gup" path="res://Assets/LevelDownMenu/remaining_points.png" id="3_05s83"]
+[ext_resource type="Texture2D" uid="uid://dv3nftad8rwrb" path="res://Assets/LevelDownMenu/ButtonRedo.png" id="5_kms23"]
+[ext_resource type="Texture2D" uid="uid://bc7b25yrg1kuj" path="res://Assets/LevelDownMenu/ButtonRedoPressed.png" id="6_d0acn"]
 [ext_resource type="Texture2D" uid="uid://b1yysssaxylsf" path="res://Assets/LevelDownMenu/stat_holder.png" id="6_ehsoa"]
+[ext_resource type="Texture2D" uid="uid://b4fqnx64omj62" path="res://Assets/LevelDownMenu/ButtonOk.png" id="7_sin7p"]
+[ext_resource type="Texture2D" uid="uid://ll12s28ac6hm" path="res://Assets/LevelDownMenu/ButtonOkPressed.png" id="8_35pf5"]
 [ext_resource type="Texture2D" uid="uid://cdn3hop83k8h4" path="res://Assets/LevelDownMenu/ButtonPos.png" id="9_0r26s"]
-[ext_resource type="Texture2D" uid="uid://ck2ljbjve1qbu" path="res://Assets/LevelDownMenu/reset.png" id="9_kms23"]
-[ext_resource type="Texture2D" uid="uid://b1nwl4w618dtq" path="res://Assets/LevelDownMenu/Validate.png" id="10_d0acn"]
 [ext_resource type="Texture2D" uid="uid://biv2iyx4ebhnh" path="res://Assets/LevelDownMenu/ButtonPosPressed.png" id="10_ehsoa"]
 [ext_resource type="Texture2D" uid="uid://db43y5yw30l58" path="res://Assets/LevelDownMenu/Icon2.png" id="10_rr061"]
 [ext_resource type="Texture2D" uid="uid://bjyyj5wn6ft8s" path="res://Assets/LevelDownMenu/Icon1.png" id="11_kms23"]
 [ext_resource type="Texture2D" uid="uid://d4e7qup837qpe" path="res://Assets/LevelDownMenu/Icon3.png" id="12_d0acn"]
+[ext_resource type="Texture2D" uid="uid://elrgds6ncplm" path="res://Assets/LevelDownMenu/LevelDownAnimGlitch-Sheet.png" id="13_rg21y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_35pf5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sin7p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rg21y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rr061"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kms23"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr061"]
+atlas = ExtResource("13_rg21y")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kms23"]
+atlas = ExtResource("13_rg21y")
+region = Rect2(480, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0acn"]
+atlas = ExtResource("13_rg21y")
+region = Rect2(960, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sin7p"]
+atlas = ExtResource("13_rg21y")
+region = Rect2(1440, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35pf5"]
+atlas = ExtResource("13_rg21y")
+region = Rect2(1920, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1npdm"]
+atlas = ExtResource("13_rg21y")
+region = Rect2(2400, 0, 480, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yxua5"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_rr061")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_kms23")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_d0acn")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_sin7p")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_35pf5")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_1npdm")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="LevelDownMenu" type="Control" unique_id=2091781716]
 layout_mode = 3
@@ -52,102 +113,71 @@ theme_override_constants/margin_top = 16
 
 [node name="Level" type="HBoxContainer" parent="Menuing" unique_id=1221490192]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 29.0
-offset_right = 200.0
-offset_bottom = 93.0
+offset_left = 44.25
+offset_top = 28.0
+offset_right = 208.25
+offset_bottom = 92.0
 size_flags_horizontal = 4
+theme_override_constants/separation = 0
 
 [node name="Level" type="Label" parent="Menuing/Level" unique_id=2053648574]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(1, 0.92156863, 0.64705884, 1)
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.3254902, 0.7882353, 0.18039216, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 32
-text = "Level "
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TextureRect3" type="TextureRect" parent="Menuing/Level" unique_id=1706245476]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("2_dwoxl")
-
-[node name="LevelLabel" type="Label" parent="Menuing/Level/TextureRect3" unique_id=1428058069]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 32
-text = "1"
+theme_override_font_sizes/font_size = 48
+text = "LEVEL %"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ptaText" type="Label" parent="Menuing" unique_id=1544767370]
+texture_filter = 1
 layout_mode = 0
-offset_left = 20.0
-offset_top = 125.25
-offset_right = 130.0
-offset_bottom = 144.79167
+offset_left = 19.0
+offset_top = 121.0
+offset_right = 129.0
+offset_bottom = 193.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.65882355, 0, 0.9764706, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 14
-text = "Points to assign "
+theme_override_font_sizes/font_size = 36
+text = "Points to
+assign"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="pta" type="TextureRect" parent="Menuing" unique_id=969870086]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 58.0
-offset_top = 161.5
-offset_right = 90.0
-offset_bottom = 193.5
+offset_left = 182.0
+offset_top = 135.0
+offset_right = 214.0
+offset_bottom = 167.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_05s83")
 
-[node name="PointsLabel" type="Label" parent="Menuing/pta" unique_id=677518283]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 16
-text = "-2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ConfirmButtons" type="HBoxContainer" parent="Menuing" unique_id=1877258739]
 layout_mode = 0
-offset_left = 170.75
-offset_top = 179.5
-offset_right = 238.75
-offset_bottom = 211.5
+offset_left = 160.0
+offset_top = 192.25
+offset_right = 228.0
+offset_bottom = 224.25
 size_flags_horizontal = 8
+theme_override_constants/separation = 12
 
 [node name="Reset" type="TextureButton" parent="Menuing/ConfirmButtons" unique_id=1106164159]
 layout_mode = 2
-texture_normal = ExtResource("9_kms23")
+texture_normal = ExtResource("5_kms23")
+texture_pressed = ExtResource("6_d0acn")
 
 [node name="Validate" type="TextureButton" parent="Menuing/ConfirmButtons" unique_id=33653587]
 layout_mode = 2
-texture_normal = ExtResource("10_d0acn")
+texture_normal = ExtResource("7_sin7p")
+texture_pressed = ExtResource("8_35pf5")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Menuing" unique_id=147045194]
 layout_mode = 1
@@ -276,7 +306,7 @@ stretch_mode = 2
 layout_mode = 2
 theme_override_constants/margin_top = 16
 
-[node name="LevelDownTransi" type="TextureButton" parent="." unique_id=598115877]
+[node name="LevelDownTransi" type="Button" parent="." unique_id=284732531]
 unique_name_in_owner = true
 visible = false
 z_index = 1
@@ -286,7 +316,27 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("2_2k3c1")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_35pf5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sin7p")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_rg21y")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rr061")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kms23")
+
+[node name="ColorRect" type="ColorRect" parent="LevelDownTransi" unique_id=1762720208]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="LevelDownTransi" unique_id=1071933679]
+position = Vector2(240, 135)
+sprite_frames = SubResource("SpriteFrames_yxua5")
+autoplay = "default"
+frame = 5
+frame_progress = 0.3369925
 
 [connection signal="pressed" from="Menuing/ConfirmButtons/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="Menuing/ConfirmButtons/Validate" to="." method="_on_validate_pressed"]

@@ -22,31 +22,6 @@ func _physics_process(delta: float) -> void:
 	movement(delta)
 	attacking()
 
-#func movement(delta: float) -> void:
-	#if knockback_velocity.length() > 0:
-		#knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 3000 * delta)
-		#velocity = knockback_velocity
-	#elif PlayerStats.resource.speed > 0:
-		#var input_vector := Vector2.ZERO
-		#input_vector.x = Input.get_axis("left", "right")
-		#input_vector.y = Input.get_axis("up", "down")
-		#input_vector = input_vector.normalized()
-#
-		#var player_speed: float = PlayerStats.resource.speed
-		#velocity = input_vector * speed * abs(player_speed)
-	#elif PlayerStats.resource.speed < 0:
-		#velocity = Vector2.ZERO
-		#handle_teleport()
-#
-	#if velocity.x != 0:
-		#sprite.flip_h = velocity.x < 0
-		#%Sprite2D2.flip_h = velocity.x < 0
-		#if velocity.x < 0:
-			#%Sprite2D2.position.x = abs(%Sprite2D2.position.x) * -1
-		#else:
-			#%Sprite2D2.position.x = abs(%Sprite2D2.position.x)
-	#move_and_slide()
-
 var teleport_distance_max: float:
 	get:
 		return 1000.0 if PlayerStats.resource.speed == -2 else 600.0
@@ -73,7 +48,7 @@ func movement(delta: float) -> void:
 
 		var player_speed: float = PlayerStats.resource.speed
 		velocity = input_vector * speed * abs(player_speed)
-	elif PlayerStats.resource.speed < 0:
+	if PlayerStats.resource.speed < 0:
 		velocity = Vector2.ZERO
 		handle_teleport_charge(delta)
 
@@ -87,29 +62,69 @@ func movement(delta: float) -> void:
 	move_and_slide()
 
 
-func handle_teleport_charge(delta: float) -> void:
-	var input_vector := Vector2.ZERO
-	input_vector.x = Input.get_axis("left", "right")
-	input_vector.y = Input.get_axis("up", "down")
-	input_vector = input_vector.normalized()
+enum TeleportKey {NONE, LEFT, RIGHT, UP, DOWN}
+var active_teleport_key: TeleportKey = TeleportKey.NONE
 
-	if input_vector != Vector2.ZERO:
-		if not is_charging_teleport:
-			start_teleport_charge(input_vector)
-		teleport_direction = input_vector
+
+func handle_teleport_charge(delta: float) -> void:
+	if not is_charging_teleport:
+		var pressed_key: TeleportKey = get_first_pressed_key()
+		if pressed_key != TeleportKey.NONE:
+			start_teleport_charge(pressed_key)
+	else:
 		teleport_hold_time += delta
 		update_teleport_preview()
-	elif is_charging_teleport:
-		release_teleport()
+
+		if is_key_released(active_teleport_key):
+			release_teleport()
 
 
-func start_teleport_charge(direction: Vector2) -> void:
+func get_first_pressed_key() -> TeleportKey:
+	if Input.is_action_just_pressed("left"):
+		return TeleportKey.LEFT
+	if Input.is_action_just_pressed("right"):
+		return TeleportKey.RIGHT
+	if Input.is_action_just_pressed("up"):
+		return TeleportKey.UP
+	if Input.is_action_just_pressed("down"):
+		return TeleportKey.DOWN
+	return TeleportKey.NONE
+
+
+func is_key_released(key: TeleportKey) -> bool:
+	match key:
+		TeleportKey.LEFT:
+			return Input.is_action_just_released("left")
+		TeleportKey.RIGHT:
+			return Input.is_action_just_released("right")
+		TeleportKey.UP:
+			return Input.is_action_just_released("up")
+		TeleportKey.DOWN:
+			return Input.is_action_just_released("down")
+	return false
+
+
+func key_to_direction(key: TeleportKey) -> Vector2:
+	match key:
+		TeleportKey.LEFT:
+			return Vector2.LEFT
+		TeleportKey.RIGHT:
+			return Vector2.RIGHT
+		TeleportKey.UP:
+			return Vector2.UP
+		TeleportKey.DOWN:
+			return Vector2.DOWN
+	return Vector2.ZERO
+
+
+func start_teleport_charge(key: TeleportKey) -> void:
 	is_charging_teleport = true
+	active_teleport_key = key
 	teleport_hold_time = 0.0
-	teleport_direction = direction
+	teleport_direction = key_to_direction(key)
 
 	teleport_ghost = Sprite2D.new()
-	teleport_ghost.scale = Vector2(4,4)
+	teleport_ghost.scale = Vector2(4, 4)
 	teleport_ghost.texture = sprite.texture
 	teleport_ghost.hframes = sprite.hframes
 	teleport_ghost.vframes = sprite.vframes
@@ -120,7 +135,7 @@ func start_teleport_charge(direction: Vector2) -> void:
 
 func update_teleport_preview() -> void:
 	var charge_distance: float = min(teleport_hold_time * teleport_charge_rate, teleport_distance_max)
-	var target_position: Vector2 = get_safe_teleport_position(teleport_direction, charge_distance)
+	var target_position: Vector2 = global_position + teleport_direction * charge_distance
 
 	teleport_ghost.global_position = target_position
 	teleport_ghost.flip_h = teleport_direction.x < 0
@@ -128,14 +143,17 @@ func update_teleport_preview() -> void:
 
 func release_teleport() -> void:
 	var origin_position: Vector2 = global_position
+	var charge_distance: float = min(teleport_hold_time * teleport_charge_rate, teleport_distance_max)
+	var target_position: Vector2 = origin_position + teleport_direction * charge_distance
 
-	if teleport_ghost:
-		global_position = teleport_ghost.global_position
-	
+	global_position = target_position
+	resolve_teleport_overlap(teleport_direction)
+
 	if origin_position.distance_to(global_position) > 200:
 		spawn_blackhole(origin_position, PlayerStats.resource.speed)
 
 	is_charging_teleport = false
+	active_teleport_key = TeleportKey.NONE
 	teleport_hold_time = 0.0
 
 	if teleport_ghost:
@@ -143,35 +161,33 @@ func release_teleport() -> void:
 		teleport_ghost = null
 
 
-func get_safe_teleport_position(direction: Vector2, distance: float) -> Vector2:
+func resolve_teleport_overlap(direction: Vector2) -> void:
 	var step: float = 4.0
-	var remaining: float = distance
+	var safety_counter: int = 300
 
-	while remaining > 0:
-		var offset: Vector2 = direction * remaining
-		if not test_move(global_transform, offset):
-			return global_position + offset
-		remaining -= step
-
-	return global_position
+	while test_move(global_transform, Vector2.ZERO) and safety_counter > 0:
+		global_position -= direction * step
+		safety_counter -= 1
 
 func attacking() -> void:
 	if PlayerStats.resource.strength == 0:
 		return
 	if Input.is_action_just_pressed("LMB") and attack_cooldown.is_stopped():
 		hit_box.look_at(get_global_mouse_position())
+		if PlayerStats.resource.strength == 0:
+			pass
 		if PlayerStats.resource.strength > 0:
-			hit_box.scale = Vector2(.5, .5) * PlayerStats.resource.strength
+			hit_box.scale = Vector2(.66, .66) * PlayerStats.resource.strength
 			hit_box.visible = true
 			hit_box.monitorable = true
 			await get_tree().create_timer(ATTACK_DURATION).timeout # TODO : Real timer
 			hit_box.visible = false
 			hit_box.monitorable = false
 			attack_cooldown.start()
-		if PlayerStats.resource.strength < 0:
-			spawn_blackhole(get_global_mouse_position(), PlayerStats.resource.strength)
-			attack_cooldown.wait_time = 1.0
-			attack_cooldown.start()
+		# if PlayerStats.resource.strength < 0:
+		# 	spawn_blackhole(get_global_mouse_position(), PlayerStats.resource.strength)
+		# 	attack_cooldown.wait_time = 1.0
+		# 	attack_cooldown.start()
 
 func spawn_blackhole(pos: Vector2, power: int) -> void:
 	var blackhole: Blackhole = BLACKHOLE.instantiate()
@@ -183,8 +199,9 @@ func receive_attack(hitbox: Hitbox) -> void:
 	if is_invincible:
 		return
 	start_invincibility()
-	var knockback_direction: Vector2 = (global_position - hitbox.global_position).normalized()
-	knockback_velocity = knockback_direction * KNOCKBACK_POWER
+	if !hitbox.destroy_on_contact:
+		var knockback_direction: Vector2 = (global_position - hitbox.global_position).normalized()
+		knockback_velocity = knockback_direction * KNOCKBACK_POWER
 	take_damage()
 
 func take_damage() -> void:

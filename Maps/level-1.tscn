@@ -1,61 +1,211 @@
 [gd_scene format=3 uid="uid://brfgjlvk17stk"]
 
+[ext_resource type="Script" uid="uid://kqm8xviw8llo" path="res://Maps/level.gd" id="1_b13y3"]
 [ext_resource type="PackedScene" uid="uid://cx5ghr7oecywv" path="res://Entities/Player/Player.tscn" id="1_r38fg"]
+[ext_resource type="PackedScene" uid="uid://b2385ms0csvlt" path="res://Entities/Enemies/Turret.tscn" id="2_n4ryr"]
 [ext_resource type="PackedScene" uid="uid://npnutmg8mqpu" path="res://Entities/Enemies/enemy.tscn" id="2_qfrtj"]
+[ext_resource type="Texture2D" uid="uid://dg1gdeb8nagg0" path="res://Assets/LD/TV Screen.png" id="4_b13y3"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_216ti"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4b8f5"]
+vertices = PackedVector2Array(-706, 474, -894, 474, -894, 386, -706, 386, -706, -386, -894, -386, -894, -474, -706, -474, 642, 322, 894, 474, -446, 474, 446, 322, 194, 322, -194, 322, 194, -126, 194, -322, 446, -322, 894, -474, 642, -322, -446, -474, -194, -322, -446, 126, -194, 126, -446, -126, -194, -126, 194, 126, -894, 126, -894, -126)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 11, 10), PackedInt32Array(13, 12, 10), PackedInt32Array(14, 15, 16, 11), PackedInt32Array(17, 9, 8, 18), PackedInt32Array(19, 17, 18, 16), PackedInt32Array(19, 16, 15), PackedInt32Array(19, 15, 20), PackedInt32Array(13, 10, 21, 22), PackedInt32Array(23, 19, 20, 24), PackedInt32Array(11, 12, 25), PackedInt32Array(14, 11, 25), PackedInt32Array(24, 14, 25, 22), PackedInt32Array(23, 24, 22, 21), PackedInt32Array(23, 21, 26, 27)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-960, -540, -960, 540, 960, 540, 960, -540)])
+agent_radius = 66.0
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_02fxq"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jn2qw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pbt4w"]
 normal = Vector2(0, 1)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ix8a0"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gw2tx"]
 normal = Vector2(-1, 0)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h8c8n"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hsehr"]
 normal = Vector2(1, 0)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ac8ss"]
+size = Vector2(16, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlk77"]
+size = Vector2(32, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bftq"]
+size = Vector2(80, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4ryr"]
+size = Vector2(64, 16)
+
 [node name="Testlevel" type="Node2D" unique_id=1901868416]
+script = ExtResource("1_b13y3")
 
 [node name="Player" parent="." unique_id=815963282 instance=ExtResource("1_r38fg")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=913770846]
 
-[node name="Enemies" type="Node2D" parent="." unique_id=2048646103]
+[node name="Enemies" type="Node2D" parent="." unique_id=301096659]
+position = Vector2(121, 121)
 
-[node name="Enemy" parent="Enemies" unique_id=711083395 instance=ExtResource("2_qfrtj")]
-position = Vector2(693, 410)
+[node name="Turret" parent="Enemies" unique_id=711083395 instance=ExtResource("2_n4ryr")]
+position = Vector2(-953, 327)
 
-[node name="Enemy2" parent="Enemies" unique_id=834090440 instance=ExtResource("2_qfrtj")]
-position = Vector2(-742, 281)
+[node name="Turret2" parent="Enemies" unique_id=628418611 instance=ExtResource("2_n4ryr")]
+position = Vector2(-953, -569)
 
-[node name="Enemy3" parent="Enemies" unique_id=13938878 instance=ExtResource("2_qfrtj")]
-position = Vector2(-785, -298)
+[node name="Enemy9" parent="Enemies" unique_id=930220804 instance=ExtResource("2_qfrtj")]
+position = Vector2(711, -249)
 
-[node name="Enemy4" parent="Enemies" unique_id=436715531 instance=ExtResource("2_qfrtj")]
-position = Vector2(511, -209)
+[node name="Enemy10" parent="Enemies" unique_id=749587672 instance=ExtResource("2_qfrtj")]
+position = Vector2(711, 7)
 
-[node name="ScreenBorder" type="Node2D" parent="." unique_id=365184777]
+[node name="Enemy13" parent="Enemies" unique_id=1556333115 instance=ExtResource("2_qfrtj")]
+position = Vector2(-953, -121)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="ScreenBorder" unique_id=506155468]
+[node name="Enemy14" parent="Enemies" unique_id=2098625807 instance=ExtResource("2_qfrtj")]
+position = Vector2(7, -569)
+
+[node name="Enemy15" parent="Enemies" unique_id=129065498 instance=ExtResource("2_qfrtj")]
+position = Vector2(-249, -569)
+
+[node name="Wave2" type="Node2D" parent="." unique_id=411094398]
+process_mode = 4
+
+[node name="Enemy9" parent="Wave2" unique_id=243969407 instance=ExtResource("2_qfrtj")]
+position = Vector2(-384, -384)
+
+[node name="Enemy10" parent="Wave2" unique_id=1600151667 instance=ExtResource("2_qfrtj")]
+position = Vector2(-384, 384)
+
+[node name="Enemy12" parent="Wave2" unique_id=388781700 instance=ExtResource("2_qfrtj")]
+position = Vector2(-832, 0)
+
+[node name="Turret" parent="Wave2" unique_id=1425931070 instance=ExtResource("2_n4ryr")]
+position = Vector2(896, 0)
+
+[node name="Wave3" type="Node2D" parent="." unique_id=1256098576]
+process_mode = 4
+
+[node name="Enemy9" parent="Wave3" unique_id=2031404719 instance=ExtResource("2_qfrtj")]
+position = Vector2(832, -384)
+
+[node name="Enemy10" parent="Wave3" unique_id=1816728558 instance=ExtResource("2_qfrtj")]
+position = Vector2(832, 384)
+
+[node name="Enemy12" parent="Wave3" unique_id=376458170 instance=ExtResource("2_qfrtj")]
+position = Vector2(-320, 448)
+
+[node name="Enemy13" parent="Wave3" unique_id=763335781 instance=ExtResource("2_qfrtj")]
+position = Vector2(-320, -448)
+
+[node name="Enemy14" parent="Wave3" unique_id=1527990809 instance=ExtResource("2_qfrtj")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1011532762]
+navigation_polygon = SubResource("NavigationPolygon_4b8f5")
+
+[node name="ScreenBorder" type="Node2D" parent="NavigationRegion2D" unique_id=1313860075]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/ScreenBorder" unique_id=1928130586]
 position = Vector2(0, 540)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBorder/StaticBody2D" unique_id=1000807743]
-shape = SubResource("WorldBoundaryShape2D_216ti")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/ScreenBorder/StaticBody2D" unique_id=1443594738]
+shape = SubResource("WorldBoundaryShape2D_jn2qw")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="ScreenBorder" unique_id=875623108]
+[node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D/ScreenBorder" unique_id=1167898614]
 position = Vector2(0, -540)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBorder/StaticBody2D2" unique_id=1287113751]
-shape = SubResource("WorldBoundaryShape2D_02fxq")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/ScreenBorder/StaticBody2D2" unique_id=537754295]
+shape = SubResource("WorldBoundaryShape2D_pbt4w")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="ScreenBorder" unique_id=784515411]
+[node name="StaticBody2D3" type="StaticBody2D" parent="NavigationRegion2D/ScreenBorder" unique_id=1918552783]
 position = Vector2(960, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBorder/StaticBody2D3" unique_id=1217969937]
-shape = SubResource("WorldBoundaryShape2D_ix8a0")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/ScreenBorder/StaticBody2D3" unique_id=1133784017]
+shape = SubResource("WorldBoundaryShape2D_gw2tx")
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="ScreenBorder" unique_id=257574096]
+[node name="StaticBody2D4" type="StaticBody2D" parent="NavigationRegion2D/ScreenBorder" unique_id=175926912]
 position = Vector2(-960, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBorder/StaticBody2D4" unique_id=1879989532]
-shape = SubResource("WorldBoundaryShape2D_h8c8n")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/ScreenBorder/StaticBody2D4" unique_id=157837931]
+shape = SubResource("WorldBoundaryShape2D_hsehr")
+
+[node name="Hole" type="StaticBody2D" parent="NavigationRegion2D" unique_id=1103889307]
+position = Vector2(640, -64)
+scale = Vector2(4, 4)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Hole" unique_id=236158524]
+position = Vector2(-24, 16)
+shape = SubResource("RectangleShape2D_ac8ss")
+
+[node name="Hole2" type="StaticBody2D" parent="NavigationRegion2D" unique_id=736712049]
+position = Vector2(-576, -448)
+scale = Vector2(4, 4)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Hole2" unique_id=1996941956]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_rlk77")
+
+[node name="Hole3" type="StaticBody2D" parent="NavigationRegion2D" unique_id=1912507971]
+position = Vector2(-576, 320)
+scale = Vector2(4, 4)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Hole3" unique_id=1302144976]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_rlk77")
+
+[node name="Hole4" type="StaticBody2D" parent="NavigationRegion2D" unique_id=387024809]
+position = Vector2(-576, 320)
+scale = Vector2(4, 4)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Hole4" unique_id=2047942267]
+position = Vector2(-56, -16)
+shape = SubResource("RectangleShape2D_8bftq")
+
+[node name="Hole5" type="StaticBody2D" parent="NavigationRegion2D" unique_id=1672243929]
+position = Vector2(-576, -192)
+scale = Vector2(4, 4)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Hole5" unique_id=1260802969]
+position = Vector2(-56, -16)
+shape = SubResource("RectangleShape2D_8bftq")
+
+[node name="Hole7" type="StaticBody2D" parent="NavigationRegion2D" unique_id=1894921163]
+position = Vector2(320, 256)
+scale = Vector2(4, 4)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Hole7" unique_id=450018931]
+position = Vector2(-80, -8)
+shape = SubResource("RectangleShape2D_n4ryr")
+
+[node name="Hole8" type="StaticBody2D" parent="NavigationRegion2D" unique_id=1796801706]
+position = Vector2(320, -192)
+scale = Vector2(4, 4)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Hole8" unique_id=1095441563]
+position = Vector2(-80, -8)
+shape = SubResource("RectangleShape2D_n4ryr")
+
+[node name="TvScreen" type="Sprite2D" parent="." unique_id=2116064299]
+texture = ExtResource("4_b13y3")
+
+[node name="Timer" type="Timer" parent="." unique_id=1295866613]
+wait_time = 7.5
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="." unique_id=1346241929]
+wait_time = 17.5
+one_shot = true
+autostart = true

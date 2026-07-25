@@ -1,15 +1,21 @@
 extends Node2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var level_id: int = 0
+var level_number: Array[int] = [
+	1,
+	0,
+	-1
+]
 var levels: Array[String] = [
 	"res://Maps/level1.tscn",
 	"res://Maps/level0.tscn",
 	"res://Maps/level-1.tscn"
 ]
 var timers: Array[int] = [
-	5,
-	5,
-	5
+	1,
+	1,
+	20
 ]
 
 @onready var armor_amt: TextureRect = %ArmorAmt
@@ -23,6 +29,8 @@ var timers: Array[int] = [
 @onready var survive: Sprite2D = %Survive
 
 @onready var armor_icons: HBoxContainer = %ArmorIcons
+@onready var stage_no: Label = %StageNo
+@onready var stage_cleared: Label = %StageCleared
 
 func _ready() -> void:
 	PlayerStats.armor_updated.connect(_on_player_armor_updated)
@@ -31,20 +39,23 @@ func _ready() -> void:
 func new_stage() -> void:
 	print("new level !")
 	load_stage(level_id)
+	%Exposed.visible = false
 	
+	stage_no.text = stage_no.text.substr(0, stage_no.text.length() - 1) + str(level_number[level_id])
 	armor_amt.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
 	strength_amt.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)
 	speed_amt.texture = PlayerStats.stats_points.get(PlayerStats.resource.speed)
-
+	timer.set_timer(timers[level_id])
+	current_level.visible = true
 	survive.visible = true
 	await wait_for_input()
 	survive.visible = false
 	
 	PlayerStats.reset_current_armor()
-	current_level.visible = true
+	
 	current_level.process_mode = Node2D.PROCESS_MODE_INHERIT
 	canvas_layer.visible = true
-	timer.start_timer(timers[level_id])
+	timer.start_timer()
 	level_id += 1
 
 func wait_for_input() -> void:
@@ -83,11 +94,19 @@ func _on_player_armor_updated(amount: int) -> void:
 		var icon_node: TextureRect = armor_icons.get_child(i)
 		icon_node.texture = icon
 		icon_node.visible = abs(amount) >= i + 1
+	if amount == 0:
+		%Exposed.visible = true
 
 func _on_timer_timer_reached_zero() -> void:
+	await get_tree().process_frame
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.queue_free()
+	animation_player.play("cleared")
+	await animation_player.animation_finished
 	for child in current_level.get_children():
 		child.queue_free()
 	current_level.visible = false
+	stage_cleared.position = Vector2(237,-266)
 	current_level.process_mode = Node2D.PROCESS_MODE_DISABLED
 	canvas_layer.visible = false
 	level_down_menu.level_down()

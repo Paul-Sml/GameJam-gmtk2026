@@ -33,6 +33,7 @@ enemies=""
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true
+theme/custom_font="uid://cyt8mggt2o3op"
 
 [input]
 

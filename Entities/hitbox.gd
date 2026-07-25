@@ -8,6 +8,7 @@ class_name Hitbox
 		return damage
 
 @export var isPlayer: bool = false
+@export var destroy_on_contact: bool = false
 
 func _ready() -> void:
 	monitoring = false

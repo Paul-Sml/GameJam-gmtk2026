@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bktduw1t6kivc"]
+
+[ext_resource type="Texture2D" uid="uid://dbh5euyb3tgxd" path="res://Assets/LD/SpawnWarning.png" id="1_eywe4"]
+
+[node name="SpawnIndicator" type="Sprite2D" unique_id=1920841881]
+scale = Vector2(4, 4)
+texture = ExtResource("1_eywe4")

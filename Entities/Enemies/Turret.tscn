@@ -1,38 +1,38 @@
-[gd_scene format=3 uid="uid://npnutmg8mqpu"]
+[gd_scene format=3 uid="uid://b2385ms0csvlt"]
 
-[ext_resource type="Script" uid="uid://b104rhgwu0dqr" path="res://Entities/Enemies/enemy.gd" id="1_6rqwt"]
-[ext_resource type="Texture2D" uid="uid://cyqw7xc5s30le" path="res://Assets/Characters/Ravager.png" id="2_4jf10"]
-[ext_resource type="Script" uid="uid://cen50wtf211c1" path="res://Entities/hurtbox.gd" id="3_ihd1f"]
-[ext_resource type="Script" uid="uid://bdptp85u1de4u" path="res://Entities/hitbox.gd" id="4_4jf10"]
+[ext_resource type="Script" uid="uid://bqyfikujnor7s" path="res://Entities/Enemies/turret.gd" id="1_w0lll"]
+[ext_resource type="Texture2D" uid="uid://cyqw7xc5s30le" path="res://Assets/Characters/Ravager.png" id="2_4di44"]
+[ext_resource type="Script" uid="uid://cen50wtf211c1" path="res://Entities/hurtbox.gd" id="3_jy6qo"]
+[ext_resource type="Script" uid="uid://bdptp85u1de4u" path="res://Entities/hitbox.gd" id="4_v1st3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8c8n"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0lll"]
 bg_color = Color(0.3254902, 0.101960786, 0.06666667, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vepnw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4di44"]
 bg_color = Color(1, 0.11764706, 0.14901961, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5eq1"]
 size = Vector2(128, 128)
 
-[node name="Enemy" type="CharacterBody2D" unique_id=711083395 groups=["enemies"]]
+[node name="Turret" type="CharacterBody2D" unique_id=711083395 groups=["enemies"]]
 collision_layer = 8
 collision_mask = 8
 motion_mode = 1
-script = ExtResource("1_6rqwt")
-speed = 200.0
+script = ExtResource("1_w0lll")
+health = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1841249340]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=896011791]
 unique_name_in_owner = true
 visible = false
 offset_left = -64.0
 offset_top = -84.0
 offset_right = 64.0
 offset_bottom = -64.0
-theme_override_styles/background = SubResource("StyleBoxFlat_h8c8n")
-theme_override_styles/fill = SubResource("StyleBoxFlat_vepnw")
+theme_override_styles/background = SubResource("StyleBoxFlat_w0lll")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4di44")
 max_value = 4.0
 step = 1.0
-value = 2.0
+value = 4.0
 show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=249277601]
@@ -43,12 +43,12 @@ unique_name_in_owner = true
 self_modulate = Color(1, 0.41960785, 0.3882353, 1)
 position = Vector2(-0.12499976, 0.12499976)
 scale = Vector2(4, 4)
-texture = ExtResource("2_4jf10")
+texture = ExtResource("2_4di44")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=783155998]
 collision_layer = 4
 collision_mask = 2
-script = ExtResource("3_ihd1f")
+script = ExtResource("3_jy6qo")
 metadata/_custom_type_script = "uid://cen50wtf211c1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1788161983]
@@ -57,14 +57,20 @@ shape = SubResource("RectangleShape2D_q5eq1")
 [node name="Hitbox" type="Area2D" parent="." unique_id=1387159830]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("4_4jf10")
+script = ExtResource("4_v1st3")
 metadata/_custom_type_script = "uid://bdptp85u1de4u"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1710623748]
 shape = SubResource("RectangleShape2D_q5eq1")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=2088043151]
+[node name="Timer" type="Timer" parent="." unique_id=1203379886]
+wait_time = 2.0
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=553759554]
 unique_name_in_owner = true
 path_desired_distance = 0.1
 target_desired_distance = 0.1
 debug_enabled = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

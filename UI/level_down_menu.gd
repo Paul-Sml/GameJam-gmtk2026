@@ -4,8 +4,8 @@ class_name LevelDownMenu
 signal next_level()
 
 var saved_player_resource: CharacterStatsResource
-@onready var level_down_transi: TextureButton = %LevelDownTransi
-@onready var remaining_points_texture: TextureRect = %TextureRect3
+@onready var level_down_transi: Button = %LevelDownTransi
+@onready var remaining_points_texture: TextureRect = %pta
 @onready var strength_button: TextureButton = %StrengthButton
 @onready var armor_button: TextureButton = %ArmorButton
 @onready var speed_button: TextureButton = %SpeedButton
@@ -26,6 +26,12 @@ func set_button_textures(button: TextureButton, amount: int) -> void:
 	else:
 		button.texture_normal = BUTTON_NEG
 		button.texture_pressed = BUTTON_NEG_PRESSED
+	if amount == -2:
+		button.disabled = true
+		button.modulate = Color(1, 1, 1, 0)
+	else:
+		button.disabled = false
+		button.modulate = Color(1, 1, 1, 1)
 
 var can_skip: bool = false
 
@@ -51,16 +57,15 @@ func _on_level_down_transi_pressed() -> void:
 
 func close_menu() -> void:
 	visible = false
-
-@onready var level_label: Label = %LevelLabel
-@onready var points_label: Label = %PointsLabel
+	
 @onready var armor_amount: TextureRect = %ArmorAmount
 @onready var strength_amount: TextureRect = %StrengthAmount
 @onready var speed_amount: TextureRect = %SpeedAmount
+@onready var level_label: Label = %Level
 
 func update_visuals() -> void:
-	level_label.text = str(PlayerStats.resource.level)
-	points_label.text = str(PlayerStats.resource.points_remaining)
+	level_label.text = level_label.text.substr(0, level_label.text.length() - 1) + str(PlayerStats.resource.level)
+	remaining_points_texture.texture = PlayerStats.stats_points.get(PlayerStats.resource.points_remaining)
 	armor_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
 	strength_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)
 	speed_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.speed)
@@ -75,7 +80,7 @@ func _on_armor_button_pressed() -> void:
 		PlayerStats.resource.armor -= 1
 		armor_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
 		PlayerStats.resource.points_remaining += 1
-		points_label.text = str(PlayerStats.resource.points_remaining)
+		remaining_points_texture.texture = PlayerStats.stats_points.get(PlayerStats.resource.points_remaining)
 		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
 		else:
@@ -86,7 +91,7 @@ func _on_strength_button_pressed() -> void:
 		PlayerStats.resource.strength -= 1
 		strength_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)
 		PlayerStats.resource.points_remaining += 1
-		points_label.text = str(PlayerStats.resource.points_remaining)
+		remaining_points_texture.texture = PlayerStats.stats_points.get(PlayerStats.resource.points_remaining)
 		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
 		else:
@@ -97,7 +102,7 @@ func _on_speed_button_pressed() -> void:
 		PlayerStats.resource.speed -= 1
 		speed_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.speed)
 		PlayerStats.resource.points_remaining += 1
-		points_label.text = str(PlayerStats.resource.points_remaining)
+		remaining_points_texture.texture = PlayerStats.stats_points.get(PlayerStats.resource.points_remaining)
 		if PlayerStats.resource.points_remaining == 0:
 			visible_buttons(false)
 		else:
