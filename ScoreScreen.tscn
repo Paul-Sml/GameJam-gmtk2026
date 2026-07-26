@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bo54bv6ogb43d"]
+
+[ext_resource type="Script" uid="uid://68gfmm2qm2fw" path="res://defeatscreen.gd" id="1_bapx3"]
+[ext_resource type="Texture2D" uid="uid://sf23pc5djbh3" path="res://Assets/LevelDownMenu/DowngradeBlankMenu.png" id="2_i0lgq"]
+[ext_resource type="Texture2D" uid="uid://dv3nftad8rwrb" path="res://Assets/LevelDownMenu/ButtonRedo.png" id="3_h4hhu"]
+[ext_resource type="Texture2D" uid="uid://bc7b25yrg1kuj" path="res://Assets/LevelDownMenu/ButtonRedoPressed.png" id="4_u8bdp"]
+
+[node name="Defeatscreen" type="Node2D" unique_id=368089797]
+script = ExtResource("1_bapx3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2016694065]
+scale = Vector2(4, 4)
+texture = ExtResource("2_i0lgq")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1666887486]
+
+[node name="Label" type="Label" parent="." unique_id=701284567]
+offset_left = -811.0
+offset_top = -475.0
+offset_right = -115.0
+offset_bottom = -130.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 211
+text = "SC0RE : "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=67059512]
+offset_left = -1008.0
+offset_top = -86.0
+offset_right = -312.0
+offset_bottom = 259.0
+theme_override_colors/font_color = Color(0.8809923, 0.66971856, 0.23770705, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 160
+text = "Retry"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reset" type="TextureButton" parent="." unique_id=1734890761]
+offset_left = -320.0
+offset_top = 356.0
+offset_right = -288.0
+offset_bottom = 388.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("3_h4hhu")
+texture_pressed = ExtResource("4_u8bdp")
+
+[connection signal="pressed" from="Reset" to="." method="_on_reset_pressed"]

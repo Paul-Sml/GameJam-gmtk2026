@@ -336,6 +336,7 @@ theme_override_constants/margin_top = 16
 
 [node name="LevelDownTransi" type="Button" parent="." unique_id=284732531]
 unique_name_in_owner = true
+visible = false
 z_index = 1
 layout_mode = 1
 anchors_preset = 15

@@ -10,13 +10,17 @@
 [ext_resource type="Texture2D" uid="uid://bjyyj5wn6ft8s" path="res://Assets/LevelDownMenu/Icon1.png" id="5_miq82"]
 [ext_resource type="Texture2D" uid="uid://dtchdch4nigm1" path="res://Assets/LevelDownMenu/stat_button.png" id="6_udeyl"]
 [ext_resource type="Texture2D" uid="uid://d4e7qup837qpe" path="res://Assets/LevelDownMenu/Icon3.png" id="8_j5hk1"]
+[ext_resource type="Script" uid="uid://68gfmm2qm2fw" path="res://defeatscreen.gd" id="11_mlphb"]
+[ext_resource type="Texture2D" uid="uid://sf23pc5djbh3" path="res://Assets/LevelDownMenu/DowngradeBlankMenu.png" id="12_opqoc"]
+[ext_resource type="Texture2D" uid="uid://dv3nftad8rwrb" path="res://Assets/LevelDownMenu/ButtonRedo.png" id="13_bpcsf"]
+[ext_resource type="Texture2D" uid="uid://bc7b25yrg1kuj" path="res://Assets/LevelDownMenu/ButtonRedoPressed.png" id="14_3d2pr"]
 
 [sub_resource type="Animation" id="Animation_miq82"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/StageCleared:position")
+tracks/0/path = NodePath("main thing/CanvasLayer/StageCleared:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -32,7 +36,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/StageCleared:position")
+tracks/0/path = NodePath("main thing/CanvasLayer/StageCleared:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,22 +55,25 @@ _data = {
 [node name="GameScene" type="Node2D" unique_id=312310118]
 script = ExtResource("1_mj2jn")
 
-[node name="Timer" parent="." unique_id=1613158427 instance=ExtResource("1_mlf6e")]
+[node name="main thing" type="Node2D" parent="." unique_id=1891115523]
 unique_name_in_owner = true
-z_index = -1
+
+[node name="Timer" parent="main thing" unique_id=1613158427 instance=ExtResource("1_mlf6e")]
+unique_name_in_owner = true
+z_index = 1
 offset_left = 960.0
 offset_top = 540.0
 offset_right = 960.0
 offset_bottom = 540.0
 mouse_filter = 2
 
-[node name="CurrentLevel" type="Node2D" parent="." unique_id=2007242987]
+[node name="CurrentLevel" type="Node2D" parent="main thing" unique_id=2007242987]
 unique_name_in_owner = true
 process_mode = 4
 visible = false
 position = Vector2(960, 540)
 
-[node name="Survive" type="Sprite2D" parent="." unique_id=1964489980]
+[node name="Survive" type="Sprite2D" parent="main thing" unique_id=1964489980]
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0.78431374)
 z_index = 1
@@ -74,7 +81,7 @@ position = Vector2(960, 540)
 scale = Vector2(4, 4)
 texture = ExtResource("3_miq82")
 
-[node name="StageNo" type="Label" parent="Survive" unique_id=1171461755]
+[node name="StageNo" type="Label" parent="main thing/Survive" unique_id=1171461755]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
@@ -91,7 +98,7 @@ text = "STAGE %"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CurrObj" type="Label" parent="Survive" unique_id=343086967]
+[node name="CurrObj" type="Label" parent="main thing/Survive" unique_id=343086967]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -107,7 +114,7 @@ text = "CURRENT OBJECTIVE:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Survive" type="Label" parent="Survive" unique_id=720734573]
+[node name="Survive" type="Label" parent="main thing/Survive" unique_id=720734573]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -123,10 +130,10 @@ text = "SURVIVE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448152598]
+[node name="CanvasLayer" type="CanvasLayer" parent="main thing" unique_id=448152598]
 unique_name_in_owner = true
 
-[node name="PlayerUI" type="Control" parent="CanvasLayer" unique_id=1515167098]
+[node name="PlayerUI" type="Control" parent="main thing/CanvasLayer" unique_id=1515167098]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -134,7 +141,7 @@ offset_bottom = 40.0
 scale = Vector2(4, 4)
 mouse_filter = 2
 
-[node name="ArmorIcons" type="HBoxContainer" parent="CanvasLayer/PlayerUI" unique_id=1682893839]
+[node name="ArmorIcons" type="HBoxContainer" parent="main thing/CanvasLayer/PlayerUI" unique_id=1682893839]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 12.0
@@ -143,19 +150,19 @@ offset_right = 76.0
 offset_bottom = 44.0
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PlayerUI/ArmorIcons" unique_id=374069472]
+[node name="TextureRect" type="TextureRect" parent="main thing/CanvasLayer/PlayerUI/ArmorIcons" unique_id=374069472]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("4_miq82")
 
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PlayerUI/ArmorIcons" unique_id=443196683]
+[node name="TextureRect2" type="TextureRect" parent="main thing/CanvasLayer/PlayerUI/ArmorIcons" unique_id=443196683]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("4_miq82")
 
-[node name="Exposed" type="Label" parent="CanvasLayer/PlayerUI" unique_id=1942830877]
+[node name="Exposed" type="Label" parent="main thing/CanvasLayer/PlayerUI" unique_id=1942830877]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 18.75
@@ -167,7 +174,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 24
 text = "EXPOSED"
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PlayerUI" unique_id=1556402924]
+[node name="MarginContainer" type="MarginContainer" parent="main thing/CanvasLayer/PlayerUI" unique_id=1556402924]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -182,28 +189,28 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer" unique_id=1537979256]
+[node name="VBoxContainer2" type="VBoxContainer" parent="main thing/CanvasLayer/PlayerUI/MarginContainer" unique_id=1537979256]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Strength" type="HBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1607979713]
+[node name="Strength" type="HBoxContainer" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1607979713]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength" unique_id=695645616]
+[node name="StatIcon" type="TextureRect" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength" unique_id=695645616]
 layout_mode = 2
 texture = ExtResource("5_miq82")
 stretch_mode = 2
 
-[node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength" unique_id=1054011288]
+[node name="TickableCounter" type="VBoxContainer" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength" unique_id=1054011288]
 propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="StrengthAmt" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter" unique_id=600461116]
+[node name="StrengthAmt" type="TextureRect" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter" unique_id=600461116]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -211,7 +218,7 @@ size_flags_vertical = 4
 texture = ExtResource("5_e35lh")
 stretch_mode = 2
 
-[node name="StrengthButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter" unique_id=855977829]
+[node name="StrengthButton" type="TextureButton" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Strength/TickableCounter" unique_id=855977829]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 16)
 custom_maximum_size = Vector2(-1, 16)
@@ -220,24 +227,24 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("6_udeyl")
 
-[node name="Armor" type="HBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1283895023]
+[node name="Armor" type="HBoxContainer" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1283895023]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1036092823]
+[node name="StatIcon" type="TextureRect" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1036092823]
 layout_mode = 2
 texture = ExtResource("4_udeyl")
 stretch_mode = 2
 
-[node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1789835924]
+[node name="TickableCounter" type="VBoxContainer" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor" unique_id=1789835924]
 propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="ArmorAmt" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1518564696]
+[node name="ArmorAmt" type="TextureRect" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1518564696]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -245,7 +252,7 @@ size_flags_vertical = 4
 texture = ExtResource("5_e35lh")
 stretch_mode = 2
 
-[node name="ArmorButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1940965894]
+[node name="ArmorButton" type="TextureButton" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Armor/TickableCounter" unique_id=1940965894]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 16)
 custom_maximum_size = Vector2(-1, 16)
@@ -254,24 +261,24 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("6_udeyl")
 
-[node name="Speed" type="HBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1886386486]
+[node name="Speed" type="HBoxContainer" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1886386486]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="StatIcon" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed" unique_id=921304977]
+[node name="StatIcon" type="TextureRect" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed" unique_id=921304977]
 layout_mode = 2
 texture = ExtResource("8_j5hk1")
 stretch_mode = 2
 
-[node name="TickableCounter" type="VBoxContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed" unique_id=1175796332]
+[node name="TickableCounter" type="VBoxContainer" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed" unique_id=1175796332]
 propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="SpeedAmt" type="TextureRect" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter" unique_id=500910210]
+[node name="SpeedAmt" type="TextureRect" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter" unique_id=500910210]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -279,7 +286,7 @@ size_flags_vertical = 4
 texture = ExtResource("5_e35lh")
 stretch_mode = 2
 
-[node name="SpeedButton" type="TextureButton" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter" unique_id=783980608]
+[node name="SpeedButton" type="TextureButton" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2/Speed/TickableCounter" unique_id=783980608]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 16)
 custom_maximum_size = Vector2(-1, 16)
@@ -288,11 +295,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("6_udeyl")
 
-[node name="AllStats" type="MarginContainer" parent="CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1416308710]
+[node name="AllStats" type="MarginContainer" parent="main thing/CanvasLayer/PlayerUI/MarginContainer/VBoxContainer2" unique_id=1416308710]
 layout_mode = 2
 theme_override_constants/margin_top = 16
 
-[node name="StageCleared" type="Label" parent="CanvasLayer" unique_id=1941375991]
+[node name="StageCleared" type="Label" parent="main thing/CanvasLayer" unique_id=1941375991]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
@@ -309,13 +316,60 @@ text = "STAGE CLEARED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelDownMenu" parent="." unique_id=2091781716 instance=ExtResource("3_v1wow")]
+[node name="LevelDownMenu" parent="main thing" unique_id=2091781716 instance=ExtResource("3_v1wow")]
 unique_name_in_owner = true
 visible = false
 mouse_filter = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=355614948]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="main thing" unique_id=355614948]
+unique_name_in_owner = true
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_ueiaa")
 
-[connection signal="timer_reached_zero" from="Timer" to="." method="_on_timer_timer_reached_zero"]
-[connection signal="next_level" from="LevelDownMenu" to="." method="_on_next_level"]
+[node name="Score" type="Node2D" parent="." unique_id=368089797]
+unique_name_in_owner = true
+visible = false
+position = Vector2(960, 540)
+script = ExtResource("11_mlphb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Score" unique_id=2016694065]
+scale = Vector2(4, 4)
+texture = ExtResource("12_opqoc")
+
+[node name="Scorelabel" type="Label" parent="Score" unique_id=701284567]
+unique_name_in_owner = true
+offset_left = -811.0
+offset_top = -475.0
+offset_right = -115.0
+offset_bottom = -130.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 211
+text = "SC0RE : "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Score" unique_id=67059512]
+offset_left = -1008.0
+offset_top = -86.0
+offset_right = -312.0
+offset_bottom = 259.0
+theme_override_colors/font_color = Color(0.8809923, 0.66971856, 0.23770705, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 160
+text = "Retry"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reset" type="TextureButton" parent="Score" unique_id=1734890761]
+offset_left = -320.0
+offset_top = 356.0
+offset_right = -288.0
+offset_bottom = 388.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("13_bpcsf")
+texture_pressed = ExtResource("14_3d2pr")
+
+[connection signal="timer_reached_zero" from="main thing/Timer" to="." method="_on_timer_timer_reached_zero"]
+[connection signal="next_level" from="main thing/LevelDownMenu" to="." method="_on_next_level"]
+[connection signal="pressed" from="Score/Reset" to="Score" method="_on_reset_pressed"]

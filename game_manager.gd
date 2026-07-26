@@ -1,21 +1,24 @@
 extends Node2D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 var level_id: int = 0
 var level_number: Array[int] = [
 	1,
 	0,
-	-1
+	-1,
+	-2
 ]
 var levels: Array[String] = [
 	"res://Maps/level1.tscn",
 	"res://Maps/level0.tscn",
-	"res://Maps/level-1.tscn"
+	"res://Maps/level-1.tscn",
+	"res://Maps/level-2.tscn"
 ]
 var timers: Array[int] = [
-	1,
-	2,
-	30
+	10,
+	20,
+	30,
+	10
 ]
 
 @onready var armor_amt: TextureRect = %ArmorAmt
@@ -34,6 +37,7 @@ var timers: Array[int] = [
 
 func _ready() -> void:
 	PlayerStats.armor_updated.connect(_on_player_armor_updated)
+	PlayerStats.defeat.connect(on_defeat)
 	new_stage()
 
 func new_stage() -> void:
@@ -41,6 +45,7 @@ func new_stage() -> void:
 	load_stage(level_id)
 	%Exposed.visible = false
 	
+	canvas_layer.visible = true
 	stage_no.text = stage_no.text.substr(0, stage_no.text.length() - 1) + str(level_number[level_id])
 	armor_amt.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
 	strength_amt.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)
@@ -50,11 +55,11 @@ func new_stage() -> void:
 	survive.visible = true
 	await wait_for_input()
 	survive.visible = false
+	timer.visible = true
 	
 	PlayerStats.reset_current_armor()
 	
 	current_level.process_mode = Node2D.PROCESS_MODE_INHERIT
-	canvas_layer.visible = true
 	timer.start_timer()
 	level_id += 1
 
@@ -96,21 +101,31 @@ func _on_player_armor_updated(amount: int) -> void:
 		icon_node.visible = abs(amount) >= i + 1
 	if amount == 0:
 		%Exposed.visible = true
+	else:
+		%Exposed.visible = false
 
 func _on_timer_timer_reached_zero() -> void:
-	await get_tree().process_frame
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		enemy.queue_free()
+	if level_id == 4:
+		return
+	timer.stop_timer()
+	clear_enemies()
 	animation_player.play("cleared")
 	await animation_player.animation_finished
 	for child in current_level.get_children():
 		child.queue_free()
 	current_level.visible = false
-	stage_cleared.position = Vector2(237,-266)
+	stage_cleared.position = Vector2(237, -266)
 	current_level.process_mode = Node2D.PROCESS_MODE_DISABLED
 	canvas_layer.visible = false
+	timer.visible = false
 	level_down_menu.level_down()
 
+func clear_enemies() -> void:
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.queue_free()
+	await get_tree().process_frame
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.queue_free()
 
 func _on_next_level() -> void:
 	new_stage()
@@ -118,3 +133,16 @@ func _on_next_level() -> void:
 
 func _on_level_down_menu_next_level() -> void:
 	pass # Replace with function body.
+
+var defeat:bool = false
+
+func on_defeat() -> void:
+	if not defeat:
+		if level_id == 4:
+			defeat = true
+			%"main thing".visible = false
+			%CanvasLayer.visible = false
+			%Score.visible = true
+			%Scorelabel.text = %Scorelabel.text + str(timer.remaining_time)
+		else:
+			get_tree().change_scene_to_packed(load(PlayerStats.DEFEATSCREEN))

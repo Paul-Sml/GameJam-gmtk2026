@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b2385ms0csvlt"]
 
 [ext_resource type="Script" uid="uid://bqyfikujnor7s" path="res://Entities/Enemies/turret.gd" id="1_w0lll"]
-[ext_resource type="Texture2D" uid="uid://cyqw7xc5s30le" path="res://Assets/Characters/Ravager.png" id="2_4di44"]
+[ext_resource type="Texture2D" uid="uid://ca4qrn481okk6" path="res://Assets/Characters/Tesla-Sheet.png" id="2_w0lll"]
 [ext_resource type="Script" uid="uid://cen50wtf211c1" path="res://Entities/hurtbox.gd" id="3_jy6qo"]
 [ext_resource type="Script" uid="uid://bdptp85u1de4u" path="res://Entities/hitbox.gd" id="4_v1st3"]
 
@@ -14,9 +14,60 @@ bg_color = Color(1, 0.11764706, 0.14901961, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5eq1"]
 size = Vector2(128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4di44"]
+atlas = ExtResource("2_w0lll")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jy6qo"]
+atlas = ExtResource("2_w0lll")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1st3"]
+atlas = ExtResource("2_w0lll")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ub4a"]
+atlas = ExtResource("2_w0lll")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a4u7"]
+atlas = ExtResource("2_w0lll")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhmjf"]
+atlas = ExtResource("2_w0lll")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h8c8n"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_4di44")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_jy6qo")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_v1st3")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_2ub4a")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_6a4u7")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_mhmjf")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}]
+
 [node name="Turret" type="CharacterBody2D" unique_id=711083395 groups=["enemies"]]
-collision_layer = 8
-collision_mask = 8
+z_index = 1
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_w0lll")
 health = 2
@@ -38,12 +89,14 @@ show_percentage = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=249277601]
 shape = SubResource("RectangleShape2D_q5eq1")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=830927806]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1115226328]
 unique_name_in_owner = true
-self_modulate = Color(1, 0.41960785, 0.3882353, 1)
 position = Vector2(-0.12499976, 0.12499976)
+rotation = 0.0048214654
 scale = Vector2(4, 4)
-texture = ExtResource("2_4di44")
+sprite_frames = SubResource("SpriteFrames_h8c8n")
+autoplay = "default"
+frame_progress = 0.5457203
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=783155998]
 collision_layer = 4

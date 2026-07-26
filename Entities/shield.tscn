@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://2a6amucujj8a"]
+
+[ext_resource type="Texture2D" uid="uid://bd8avl68bwfl1" path="res://Assets/LevelDownMenu/ShieldIconNegative.png" id="1_15vcs"]
+[ext_resource type="Script" uid="uid://bt37j44drp8sa" path="res://Entities/neg_shield.gd" id="1_buy1d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_buy1d"]
+radius = 16.0
+
+[node name="negShield" type="Node2D" unique_id=1399928071]
+scale = Vector2(4, 4)
+script = ExtResource("1_buy1d")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=2106535132]
+texture = ExtResource("1_15vcs")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=784033178]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=246070605]
+shape = SubResource("CircleShape2D_buy1d")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

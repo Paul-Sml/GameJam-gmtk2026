@@ -3,5 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dbh5euyb3tgxd" path="res://Assets/LD/SpawnWarning.png" id="1_eywe4"]
 
 [node name="SpawnIndicator" type="Sprite2D" unique_id=1920841881]
+z_index = 1
 scale = Vector2(4, 4)
 texture = ExtResource("1_eywe4")

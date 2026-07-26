@@ -10,7 +10,6 @@ var remaining_time: int:
 	set(value):
 		remaining_time = value
 		if remaining_time == 0:
-			timer.stop()
 			timer_reached_zero.emit()
 
 func set_timer(time:int) -> void:
@@ -26,3 +25,6 @@ func updateValue() -> void:
 func _on_timer_timeout() -> void:
 	remaining_time -= 1
 	updateValue()
+
+func stop_timer() -> void:
+	timer.stop()

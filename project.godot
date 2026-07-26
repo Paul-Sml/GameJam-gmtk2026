@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="GMTK2026"
-run/main_scene="uid://whoqxqpfyj37"
+config/name="GMTK 2026"
+run/main_scene="uid://c7omfug6o77vj"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://Assets/icon.svg"
 
@@ -72,6 +72,7 @@ LMB={
 2d_physics/layer_2="PlayerAttacks"
 2d_physics/layer_3="MonsterAttacks"
 2d_physics/layer_4="EnemyColision"
+2d_physics/layer_8="Shield"
 
 [physics]
 

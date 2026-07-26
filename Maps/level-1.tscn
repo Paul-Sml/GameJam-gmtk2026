@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://brfgjlvk17stk"]
 
-[ext_resource type="Script" uid="uid://kqm8xviw8llo" path="res://Maps/level.gd" id="1_b13y3"]
+[ext_resource type="Script" uid="uid://kqm8xviw8llo" path="res://Maps/level_classic.gd" id="1_b13y3"]
 [ext_resource type="PackedScene" uid="uid://cx5ghr7oecywv" path="res://Entities/Player/Player.tscn" id="1_r38fg"]
 [ext_resource type="PackedScene" uid="uid://b2385ms0csvlt" path="res://Entities/Enemies/Turret.tscn" id="2_n4ryr"]
 [ext_resource type="PackedScene" uid="uid://npnutmg8mqpu" path="res://Entities/Enemies/enemy.tscn" id="2_qfrtj"]
 [ext_resource type="Texture2D" uid="uid://dg1gdeb8nagg0" path="res://Assets/LD/TV Screen.png" id="4_b13y3"]
+[ext_resource type="Texture2D" uid="uid://bbec8b3iryqf6" path="res://Assets/LD/level-1.png" id="6_4b8f5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4b8f5"]
 vertices = PackedVector2Array(-706, 474, -894, 474, -894, 386, -706, 386, -706, -386, -894, -386, -894, -474, -706, -474, 642, 322, 894, 474, -446, 474, 446, 322, 194, 322, -194, 322, 194, -126, 194, -322, 446, -322, 894, -474, 642, -322, -446, -474, -194, -322, -446, 126, -194, 126, -446, -126, -194, -126, 194, 126, -894, 126, -894, -126)
@@ -99,6 +100,8 @@ position = Vector2(-320, -448)
 [node name="Enemy14" parent="Wave3" unique_id=1527990809 instance=ExtResource("2_qfrtj")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1011532762]
+unique_name_in_owner = true
+z_index = 1
 navigation_polygon = SubResource("NavigationPolygon_4b8f5")
 
 [node name="ScreenBorder" type="Node2D" parent="NavigationRegion2D" unique_id=1313860075]
@@ -206,6 +209,7 @@ position = Vector2(-80, -8)
 shape = SubResource("RectangleShape2D_n4ryr")
 
 [node name="TvScreen" type="Sprite2D" parent="." unique_id=2116064299]
+visible = false
 texture = ExtResource("4_b13y3")
 
 [node name="Timer" type="Timer" parent="." unique_id=1295866613]
@@ -217,6 +221,10 @@ autostart = true
 wait_time = 17.5
 one_shot = true
 autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=711777563]
+scale = Vector2(4, 4)
+texture = ExtResource("6_4b8f5")
 
 [connection signal="timeout" from="Timer" to="." method="start_wave_2"]
 [connection signal="timeout" from="Timer2" to="." method="start_wave_3"]

@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://cuul6gaahsf2a"]
 
-[ext_resource type="Script" uid="uid://kqm8xviw8llo" path="res://Maps/level.gd" id="1_5w0r4"]
+[ext_resource type="Script" uid="uid://kqm8xviw8llo" path="res://Maps/level_classic.gd" id="1_5w0r4"]
 [ext_resource type="PackedScene" uid="uid://cx5ghr7oecywv" path="res://Entities/Player/Player.tscn" id="1_qvn8c"]
 [ext_resource type="PackedScene" uid="uid://b2385ms0csvlt" path="res://Entities/Enemies/Turret.tscn" id="2_5w0r4"]
 [ext_resource type="PackedScene" uid="uid://npnutmg8mqpu" path="res://Entities/Enemies/enemy.tscn" id="2_mqbrx"]
 [ext_resource type="Texture2D" uid="uid://dg1gdeb8nagg0" path="res://Assets/LD/TV Screen.png" id="4_cokd3"]
+[ext_resource type="Texture2D" uid="uid://cy0x8emt24hnu" path="res://Assets/LD/level1.png" id="6_m0ph3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vepnw"]
 vertices = PackedVector2Array(894, -474, 894, 474, 770, 258, 770, -258, -446, -474, 510, -258, -446, 474, 510, 258, -446, -126, -446, 126, -706, -126, -706, 126, -706, 474, -894, 474, -894, -474, -706, -474)
@@ -67,6 +68,8 @@ position = Vector2(832, 128)
 position = Vector2(-768, 0)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=138720468]
+unique_name_in_owner = true
+z_index = 1
 navigation_polygon = SubResource("NavigationPolygon_vepnw")
 
 [node name="ScreenBorder" type="Node2D" parent="NavigationRegion2D" unique_id=365184777]
@@ -140,5 +143,9 @@ texture = ExtResource("4_cokd3")
 wait_time = 2.5
 one_shot = true
 autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1740755379]
+scale = Vector2(4, 4)
+texture = ExtResource("6_m0ph3")
 
 [connection signal="timeout" from="Timer" to="." method="start_wave_2"]

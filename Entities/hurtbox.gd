@@ -12,5 +12,5 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	if owner.has_method("receive_attack"):
 		owner.receive_attack(hitbox)
 	
-	if hitbox.destroy_on_contact:
-		hitbox.owner.queue_free()
+	#if hitbox.destroy_on_contact:
+		#hitbox.owner.queue_free()

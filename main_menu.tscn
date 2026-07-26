@@ -1,0 +1,229 @@
+[gd_scene format=3 uid="uid://c7omfug6o77vj"]
+
+[ext_resource type="Script" uid="uid://b31asjngj2r7q" path="res://main_menu.gd" id="1_0o4t1"]
+[ext_resource type="Texture2D" uid="uid://sf23pc5djbh3" path="res://Assets/LevelDownMenu/DowngradeBlankMenu.png" id="1_dy7ct"]
+[ext_resource type="Texture2D" uid="uid://b4fqnx64omj62" path="res://Assets/LevelDownMenu/ButtonOk.png" id="2_0o4t1"]
+[ext_resource type="Texture2D" uid="uid://ll12s28ac6hm" path="res://Assets/LevelDownMenu/ButtonOkPressed.png" id="3_0k4wn"]
+[ext_resource type="Texture2D" uid="uid://dgutqelicy68q" path="res://Assets/LevelDownMenu/StatLvl2.png" id="4_j5v2v"]
+[ext_resource type="Texture2D" uid="uid://cdn3hop83k8h4" path="res://Assets/LevelDownMenu/ButtonPos.png" id="5_iotk1"]
+[ext_resource type="Texture2D" uid="uid://biv2iyx4ebhnh" path="res://Assets/LevelDownMenu/ButtonPosPressed.png" id="6_w44g7"]
+[ext_resource type="Texture2D" uid="uid://bjyyj5wn6ft8s" path="res://Assets/LevelDownMenu/Icon1.png" id="7_cm266"]
+[ext_resource type="Texture2D" uid="uid://db43y5yw30l58" path="res://Assets/LevelDownMenu/Icon2.png" id="8_g8g3n"]
+[ext_resource type="Texture2D" uid="uid://d4e7qup837qpe" path="res://Assets/LevelDownMenu/Icon3.png" id="9_8u0te"]
+
+[node name="MainMenu" type="Node2D" unique_id=1469109682]
+script = ExtResource("1_0o4t1")
+
+[node name="Menuing" type="Control" parent="." unique_id=1577640065]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ptaText" type="Label" parent="Menuing" unique_id=1244836892]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = -225.0
+offset_top = -18.0
+offset_right = -109.0
+offset_bottom = 54.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.65882355, 0, 0.9764706, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 64
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Menuing" unique_id=1146027148]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_dy7ct")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menuing" unique_id=1658310214]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 16
+
+[node name="Level" type="HBoxContainer" parent="Menuing" unique_id=574536493]
+layout_mode = 0
+offset_left = -199.0
+offset_top = -107.0
+offset_right = -35.0
+offset_bottom = -43.0
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="Level" type="Label" parent="Menuing/Level" unique_id=1147192644]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.3254902, 0.7882353, 0.18039216, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
+text = "LEVEL 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmButtons" type="HBoxContainer" parent="Menuing" unique_id=1852121037]
+layout_mode = 0
+offset_left = -36.0
+offset_top = 89.0
+offset_right = 40.0
+offset_bottom = 121.0
+size_flags_horizontal = 8
+theme_override_constants/separation = 12
+
+[node name="Validate" type="TextureButton" parent="Menuing/ConfirmButtons" unique_id=813896997]
+layout_mode = 2
+texture_normal = ExtResource("2_0o4t1")
+texture_pressed = ExtResource("3_0k4wn")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menuing" unique_id=1193021700]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.5
+offset_top = -82.0
+offset_right = 97.5
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Strength" type="HBoxContainer" parent="Menuing/VBoxContainer2" unique_id=1649778676]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="TickableCounter" type="VBoxContainer" parent="Menuing/VBoxContainer2/Strength" unique_id=1482058537]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StrengthAmount" type="TextureRect" parent="Menuing/VBoxContainer2/Strength/TickableCounter" unique_id=868100749]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_j5v2v")
+stretch_mode = 2
+
+[node name="StrengthButton" type="TextureButton" parent="Menuing/VBoxContainer2/Strength/TickableCounter" unique_id=1071179983]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_iotk1")
+texture_pressed = ExtResource("6_w44g7")
+
+[node name="StatIcon" type="TextureRect" parent="Menuing/VBoxContainer2/Strength" unique_id=1801411547]
+layout_mode = 2
+texture = ExtResource("7_cm266")
+stretch_mode = 2
+
+[node name="Armor" type="HBoxContainer" parent="Menuing/VBoxContainer2" unique_id=1810782168]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="TickableCounter" type="VBoxContainer" parent="Menuing/VBoxContainer2/Armor" unique_id=1891146463]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="ArmorAmount" type="TextureRect" parent="Menuing/VBoxContainer2/Armor/TickableCounter" unique_id=155163109]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_j5v2v")
+stretch_mode = 2
+
+[node name="ArmorButton" type="TextureButton" parent="Menuing/VBoxContainer2/Armor/TickableCounter" unique_id=380397752]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_iotk1")
+texture_pressed = ExtResource("6_w44g7")
+
+[node name="StatIcon" type="TextureRect" parent="Menuing/VBoxContainer2/Armor" unique_id=1987474196]
+layout_mode = 2
+texture = ExtResource("8_g8g3n")
+stretch_mode = 2
+
+[node name="Speed" type="HBoxContainer" parent="Menuing/VBoxContainer2" unique_id=1373899790]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="TickableCounter" type="VBoxContainer" parent="Menuing/VBoxContainer2/Speed" unique_id=2086665174]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="SpeedAmount" type="TextureRect" parent="Menuing/VBoxContainer2/Speed/TickableCounter" unique_id=1793613608]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_j5v2v")
+stretch_mode = 2
+
+[node name="SpeedButton" type="TextureButton" parent="Menuing/VBoxContainer2/Speed/TickableCounter" unique_id=1202548444]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+custom_maximum_size = Vector2(-1, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_iotk1")
+texture_pressed = ExtResource("6_w44g7")
+
+[node name="StatIcon" type="TextureRect" parent="Menuing/VBoxContainer2/Speed" unique_id=544377494]
+layout_mode = 2
+texture = ExtResource("9_8u0te")
+stretch_mode = 2
+
+[node name="AllStats" type="MarginContainer" parent="Menuing/VBoxContainer2" unique_id=2066032548]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=570511680]
+zoom = Vector2(4, 4)
+
+[connection signal="pressed" from="Menuing/ConfirmButtons/Validate" to="." method="_on_validate_pressed"]

@@ -64,7 +64,7 @@ func close_menu() -> void:
 @onready var level_label: Label = %Level
 
 func update_visuals() -> void:
-	level_label.text = level_label.text.substr(0, level_label.text.length() - 1) + str(PlayerStats.resource.level)
+	level_label.text = "LEVEL " + str(PlayerStats.resource.level)
 	remaining_points_texture.texture = PlayerStats.pta.get(PlayerStats.resource.points_remaining)
 	armor_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.armor)
 	strength_amount.texture = PlayerStats.stats_points.get(PlayerStats.resource.strength)

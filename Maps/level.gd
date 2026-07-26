@@ -1,79 +1,51 @@
 extends Node2D
+class_name Level
 
-const SPAWN_INDICATOR = preload("uid://bktduw1t6kivc")
-@onready var wave2: Node2D = $Wave2
-var wave3: Node2D
+@onready var nav_region: NavigationRegion2D = %NavigationRegion2D
+var tile_size: int = 64
+var spawn_size: float = 128.0
+const SHIELD = preload("uid://2a6amucujj8a")
 
-@onready var enemy_nodes: Array[Node] = wave2.get_children()
-var enemy_positions: Array[Vector2] = []
-var enemy_nodes3: Array[Node]
-var enemy_positions3: Array[Vector2] = []
+func spawn_neg_shield() -> void:
+	var shield := SHIELD.instantiate()
+	add_child(shield)
+	shield.global_position = find_spawn_positions(1)[0]
 
-func _ready() -> void:
-	for enemy in enemy_nodes:
-		enemy.visible = false
-		enemy_positions.append(enemy.global_position)
-	if $Wave3 != null:
-		wave3 = $Wave3
-		enemy_nodes3 = wave3.get_children()
-		for enemy in enemy_nodes3:
-			enemy.visible = false
-			enemy_positions3.append(enemy.global_position)
+func find_spawn_positions(count: int) -> Array[Vector2]:
+	var positions: Array[Vector2] = []
+	var nav_map: RID = nav_region.get_navigation_map()
+	var max_attempts_per_spawn: int = 50
 
-func start_wave_2() -> void:
-	print(enemy_positions)
-	var indicators: Array[Node2D] = []
-	var tweens: Array[Tween] = []
-	
-	for pos in enemy_positions:
-		var indicator := SPAWN_INDICATOR.instantiate()
-		wave2.add_child(indicator)
-		indicator.global_position = pos
-		indicators.append(indicator)
-		
-		var tween := create_tween()
-		tween.set_loops()
-		tween.tween_property(indicator, "modulate:a", 0.3, 0.5)
-		tween.tween_property(indicator, "modulate:a", 1.0, 0.5)
-		tweens.append(tween)
-	
-	await get_tree().create_timer(2.5).timeout
-	
-	for tween in tweens:
-		tween.kill()  # arrête le Tween proprement avant de détruire le node
-	
-	for indicator in indicators:
-		indicator.queue_free()
-	
-	for enemy in enemy_nodes:
-		enemy.visible = true
-		wave2.process_mode = Node.PROCESS_MODE_INHERIT
+	for i in range(count):
+		var found: bool = false
+		var attempts: int = 0
 
-func start_wave_3() -> void:
-	print(enemy_positions)
-	var indicators: Array[Node2D] = []
-	var tweens: Array[Tween] = []
-	
-	for pos in enemy_positions:
-		var indicator := SPAWN_INDICATOR.instantiate()
-		wave3.add_child(indicator)
-		indicator.global_position = pos
-		indicators.append(indicator)
-		
-		var tween := create_tween()
-		tween.set_loops()
-		tween.tween_property(indicator, "modulate:a", 0.3, 0.5)
-		tween.tween_property(indicator, "modulate:a", 1.0, 0.5)
-		tweens.append(tween)
-	
-	await get_tree().create_timer(2.5).timeout
-	
-	for tween in tweens:
-		tween.kill()  # arrête le Tween proprement avant de détruire le node
-	
-	for indicator in indicators:
-		indicator.queue_free()
-	
-	for enemy in enemy_nodes3:
-		enemy.visible = true
-		wave3.process_mode = Node.PROCESS_MODE_INHERIT
+		while not found and attempts < max_attempts_per_spawn:
+			attempts += 1
+			var raw_point: Vector2 = NavigationServer2D.map_get_random_point(nav_map, 1, false)
+			var candidate: Vector2 = (raw_point / tile_size).round() * tile_size
+
+			if is_position_valid(candidate, positions):
+				positions.append(candidate)
+				found = true
+
+	return positions
+
+
+func is_position_valid(pos: Vector2, existing_positions: Array[Vector2]) -> bool:
+	var space_state := get_world_2d().direct_space_state
+	var query := PhysicsShapeQueryParameters2D.new()
+	var shape := RectangleShape2D.new()
+	shape.size = Vector2(spawn_size, spawn_size)
+	query.shape = shape
+	query.transform = Transform2D(0, pos)
+
+	var results: Array = space_state.intersect_shape(query, 1)
+	if results.size() > 0:
+		return false
+
+	for existing in existing_positions:
+		if pos.distance_to(existing) < spawn_size * 2:
+			return false
+
+	return true
