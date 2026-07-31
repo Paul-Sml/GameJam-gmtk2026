@@ -73,8 +73,10 @@ var dash_distance_max: float:
 	get:
 		#return 450.0 if PlayerStats.resource.speed == -2 else 300.0
 		return 420
-@export var dash_speed: float = 2000.0
-@export var dash_cooldown_duration: float = 0.4
+@export var dash_speed: float = 1800.0
+var dash_cooldown_duration: float:
+	get:
+		return 0.15 if PlayerStats.resource.speed == -2 else 0.4
 @export var ghost_spawn_interval: float = 0.035
 
 var dash_cooldown: float = 0.0
@@ -128,8 +130,9 @@ func spawn_delayed_dash_projectile(direction: Vector2, start_position: Vector2) 
 	var perpendicular: Vector2 = direction.rotated(PI / 2)
 	var travel_distance: float = dash_distance_max - 64
 	
-	var offsets: Array[float] = [-projectile_spawn_offset, 0.0, projectile_spawn_offset]
-	
+	var offsets: Array[float] = [0.0]
+	if PlayerStats.resource.speed == -2:
+		offsets = [-projectile_spawn_offset, 0.0, projectile_spawn_offset]
 	for offset in offsets:
 		var spawn_position: Vector2 = start_position + perpendicular * offset
 		
