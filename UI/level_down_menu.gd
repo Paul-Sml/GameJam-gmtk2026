@@ -23,9 +23,11 @@ func set_button_textures(button: TextureButton, amount: int) -> void:
 	if amount > 0:
 		button.texture_normal = BUTTON_POS
 		button.texture_pressed = BUTTON_POS_PRESSED
+		button.get_material().set_shader_parameter("shine_active", false)
 	else:
 		button.texture_normal = BUTTON_NEG
 		button.texture_pressed = BUTTON_NEG_PRESSED
+		button.get_material().set_shader_parameter("shine_active", true)
 	if amount == -2:
 		button.disabled = true
 		button.modulate = Color(1, 1, 1, 0)

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d0p4l1j1ysfor" path="res://Assets/Characters/Self-Flash-Sheet.png" id="3_s0o5n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5mfqg"]
-radius = 64.0
+radius = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4xwuc"]
 atlas = ExtResource("3_s0o5n")
@@ -75,6 +75,7 @@ script = ExtResource("2_sgee4")
 damage = 2
 isPlayer = true
 destroy_on_contact = true
+isNeg = true
 metadata/_custom_type_script = "uid://bdptp85u1de4u"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=706705197]
@@ -83,7 +84,7 @@ shape = SubResource("CircleShape2D_5mfqg")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1358740519]
 rotation = 1.5707964
-scale = Vector2(4, 4)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_s0o5n")
 autoplay = "default"
 frame_progress = 0.5899304

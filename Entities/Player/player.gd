@@ -28,20 +28,6 @@ func _physics_process(delta: float) -> void:
 	attacking()
 	movement(delta)
 
-var teleport_distance_max: float:
-	get:
-		return 1000.0 if PlayerStats.resource.speed == -2 else 600.0
-
-var teleport_charge_rate: float:
-	get:
-		return 1000.0 if PlayerStats.resource.speed == -2 else 600.0
-
-var is_charging_teleport: bool = false
-var teleport_hold_time: float = 0.0
-var teleport_direction: Vector2 = Vector2.ZERO
-var teleport_ghost: Sprite2D = null
-
-
 func movement(delta: float) -> void:
 	if knockback_velocity.length() > 0:
 		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 3000 * delta)
@@ -83,18 +69,13 @@ func update_sprite_facing() -> void:
 	%Sprite2D2.flip_h = velocity.x < 0
 	%Sprite2D2.position.x = abs(%Sprite2D2.position.x) * (1 if velocity.x >= 0 else -1)
 
-@export var teleport_distance: float = 360.0
-@export var teleport_cooldown_duration: float = 1.0
-
-var teleport_cooldown: float = 0.0
-
-
 var dash_distance_max: float:
 	get:
-		return 450.0 if PlayerStats.resource.speed == -2 else 300.0
-@export var dash_speed: float = 2400.0
-@export var dash_cooldown_duration: float = 0.5
-@export var ghost_spawn_interval: float = 0.02
+		#return 450.0 if PlayerStats.resource.speed == -2 else 300.0
+		return 420
+@export var dash_speed: float = 2000.0
+@export var dash_cooldown_duration: float = 0.4
+@export var ghost_spawn_interval: float = 0.035
 
 var dash_cooldown: float = 0.0
 var is_dashing: bool = false
@@ -134,20 +115,35 @@ func start_dash(direction: Vector2) -> void:
 	dash_traveled = 0.0
 	ghost_timer = 0.0
 	is_invincible = true
+	a_sprite.modulate = Color(0.55, 0.9, 1.0, 1.0)*3
 	
 	spawn_delayed_dash_projectile(direction, global_position)
 
+@export var projectile_spawn_offset: float = 128.0
+@export var projectile_convergence_angle: float = 14.0
 
 func spawn_delayed_dash_projectile(direction: Vector2, start_position: Vector2) -> void:
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.25).timeout
 	
-	var projectile := SELF_PROJECTILE.instantiate()
-	projectile.rotation = direction.angle()
-	get_parent().add_child(projectile)
-	projectile.global_position = start_position
+	var perpendicular: Vector2 = direction.rotated(PI / 2)
+	var travel_distance: float = dash_distance_max - 64
 	
-	if projectile.has_method("launch"):
-		projectile.launch(direction, dash_distance_max - 64, dash_speed)
+	var offsets: Array[float] = [-projectile_spawn_offset, 0.0, projectile_spawn_offset]
+	
+	for offset in offsets:
+		var spawn_position: Vector2 = start_position + perpendicular * offset
+		
+		# Angle vers le centre proportionnel au décalage (signe opposé à l'offset pour converger)
+		var angle_sign: float = -sign(offset)
+		var travel_direction: Vector2 = direction.rotated(deg_to_rad(projectile_convergence_angle * angle_sign))
+		
+		var projectile := SELF_PROJECTILE.instantiate()
+		projectile.rotation = travel_direction.angle()
+		get_parent().add_child(projectile)
+		projectile.global_position = spawn_position
+		
+		if projectile.has_method("launch"):
+			projectile.launch(travel_direction, travel_distance, dash_speed)
 
 func perform_dash_step(delta: float) -> void:
 	var move_amount: float = dash_speed * delta
@@ -171,6 +167,13 @@ func end_dash() -> void:
 	velocity = Vector2.ZERO
 	dash_cooldown = dash_cooldown_duration
 	resolve_dash_overlap(dash_direction)
+	check_post_dash_overlap()
+	a_sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+func check_post_dash_overlap() -> void:
+	for area in $HurtBox.get_overlapping_areas():
+		if area is Hitbox:  # adapte selon ta structure
+			receive_attack(area)
 
 func resolve_dash_overlap(direction: Vector2) -> void:
 	var step: float = 4.0
@@ -190,6 +193,7 @@ func spawn_dash_ghost() -> void:
 	ghost_sprite.frame = ghost.frame
 	ghost_sprite.flip_h = ghost.flip_h
 	ghost_sprite.scale = Vector2(4, 4)
+	ghost_sprite.modulate = Color(0.55, 0.9, 1.0, 1.0)*3
 	ghost_sprite.modulate.a = 0.5
 	get_parent().add_child(ghost_sprite)
 	ghost_sprite.global_position = global_position
@@ -216,7 +220,7 @@ func attacking() -> void:
 		hit_box.monitorable = true
 
 		var attack_direction: Vector2 = Vector2.RIGHT.rotated(hit_box.rotation)
-		knockback_velocity += attack_direction * ATTACK_LUNGE_POWER
+		#knockback_velocity += attack_direction * ATTACK_LUNGE_POWER
 
 		await get_tree().create_timer(ATTACK_DURATION).timeout # TODO : Real timer
 		hit_box.visible = false
@@ -273,3 +277,5 @@ func start_invincibility() -> void:
 	await get_tree().create_timer(INVINCIBILITY_DURATION).timeout
 	is_invincible = false
 	a_sprite.modulate.a = 1.0
+	
+	check_post_dash_overlap()

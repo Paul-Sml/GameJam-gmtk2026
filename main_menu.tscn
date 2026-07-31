@@ -4,12 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://sf23pc5djbh3" path="res://Assets/LevelDownMenu/DowngradeBlankMenu.png" id="1_dy7ct"]
 [ext_resource type="Texture2D" uid="uid://b4fqnx64omj62" path="res://Assets/LevelDownMenu/ButtonOk.png" id="2_0o4t1"]
 [ext_resource type="Texture2D" uid="uid://ll12s28ac6hm" path="res://Assets/LevelDownMenu/ButtonOkPressed.png" id="3_0k4wn"]
+[ext_resource type="Shader" uid="uid://sywqc8fevsrp" path="res://UI/button_shine.gdshader" id="3_j5v2v"]
 [ext_resource type="Texture2D" uid="uid://dgutqelicy68q" path="res://Assets/LevelDownMenu/StatLvl2.png" id="4_j5v2v"]
 [ext_resource type="Texture2D" uid="uid://cdn3hop83k8h4" path="res://Assets/LevelDownMenu/ButtonPos.png" id="5_iotk1"]
 [ext_resource type="Texture2D" uid="uid://biv2iyx4ebhnh" path="res://Assets/LevelDownMenu/ButtonPosPressed.png" id="6_w44g7"]
 [ext_resource type="Texture2D" uid="uid://bjyyj5wn6ft8s" path="res://Assets/LevelDownMenu/Icon1.png" id="7_cm266"]
 [ext_resource type="Texture2D" uid="uid://db43y5yw30l58" path="res://Assets/LevelDownMenu/Icon2.png" id="8_g8g3n"]
 [ext_resource type="Texture2D" uid="uid://d4e7qup837qpe" path="res://Assets/LevelDownMenu/Icon3.png" id="9_8u0te"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iotk1"]
+shader = ExtResource("3_j5v2v")
+shader_parameter/shine_size = 0.04
+shader_parameter/shine_angle = 60.000000894072
+shader_parameter/shine_speed = 1.1
+shader_parameter/shine_spacing = 0.13999999687072
+shader_parameter/shine_active = true
 
 [node name="MainMenu" type="Node2D" unique_id=1469109682]
 script = ExtResource("1_0o4t1")
@@ -32,7 +41,7 @@ offset_top = -18.0
 offset_right = -109.0
 offset_bottom = 54.0
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.65882355, 0, 0.9764706, 1)
+theme_override_colors/font_color = Color(0.18039216, 0.5372549, 0.7882353, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 64
@@ -89,6 +98,7 @@ size_flags_horizontal = 8
 theme_override_constants/separation = 12
 
 [node name="Validate" type="TextureButton" parent="Menuing/ConfirmButtons" unique_id=813896997]
+material = SubResource("ShaderMaterial_iotk1")
 layout_mode = 2
 texture_normal = ExtResource("2_0o4t1")
 texture_pressed = ExtResource("3_0k4wn")

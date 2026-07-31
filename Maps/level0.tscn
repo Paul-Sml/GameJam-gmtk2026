@@ -53,7 +53,7 @@ script = ExtResource("1_vd1o1")
 position = Vector2(121, 121)
 
 [node name="Turret" parent="Enemies" unique_id=711083395 instance=ExtResource("2_8bftq")]
-position = Vector2(583, -121)
+position = Vector2(519, -121)
 
 [node name="Enemy14" parent="Enemies" unique_id=1630420420 instance=ExtResource("2_drhl5")]
 position = Vector2(711, 135)
@@ -71,19 +71,16 @@ position = Vector2(-953, 71)
 process_mode = 4
 
 [node name="Enemy9" parent="Wave2" unique_id=1993288384 instance=ExtResource("2_drhl5")]
-position = Vector2(0, 448)
+position = Vector2(448, 448)
 
 [node name="Enemy11" parent="Wave2" unique_id=426720974 instance=ExtResource("2_drhl5")]
-position = Vector2(-896, 0)
+position = Vector2(-832, 448)
 
 [node name="Enemy10" parent="Wave2" unique_id=959553347 instance=ExtResource("2_drhl5")]
-position = Vector2(704, 256)
-
-[node name="Enemy12" parent="Wave2" unique_id=1941760182 instance=ExtResource("2_drhl5")]
-position = Vector2(-320, 0)
+position = Vector2(832, -256)
 
 [node name="Turret" parent="Wave2" unique_id=1260108479 instance=ExtResource("2_8bftq")]
-position = Vector2(-896, -448)
+position = Vector2(-832, -448)
 
 [node name="Wave3" type="Node2D" parent="." unique_id=619061409]
 process_mode = 4

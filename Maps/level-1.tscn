@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bbec8b3iryqf6" path="res://Assets/LD/level-1.png" id="6_4b8f5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4b8f5"]
-vertices = PackedVector2Array(-706, 474, -894, 474, -894, 386, -706, 386, -706, -386, -894, -386, -894, -474, -706, -474, 642, 322, 894, 474, -446, 474, 446, 322, 194, 322, -194, 322, 194, -126, 194, -322, 446, -322, 894, -474, 642, -322, -446, -474, -194, -322, -446, 126, -194, 126, -446, -126, -194, -126, 194, 126, -894, 126, -894, -126)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 11, 10), PackedInt32Array(13, 12, 10), PackedInt32Array(14, 15, 16, 11), PackedInt32Array(17, 9, 8, 18), PackedInt32Array(19, 17, 18, 16), PackedInt32Array(19, 16, 15), PackedInt32Array(19, 15, 20), PackedInt32Array(13, 10, 21, 22), PackedInt32Array(23, 19, 20, 24), PackedInt32Array(11, 12, 25), PackedInt32Array(14, 11, 25), PackedInt32Array(24, 14, 25, 22), PackedInt32Array(23, 24, 22, 21), PackedInt32Array(23, 21, 26, 27)])
+vertices = PackedVector2Array(642, 322, 894, 474, -446, 474, 446, 322, 194, 322, -194, 322, 194, -126, 194, -322, 446, -322, 894, -474, 642, -322, -446, -474, -194, -322, -446, 126, -194, 126, -446, -126, -194, -126, 194, 126, -894, 126, -894, -126)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2), PackedInt32Array(5, 4, 2), PackedInt32Array(6, 7, 8, 3), PackedInt32Array(9, 1, 0, 10), PackedInt32Array(11, 9, 10, 8), PackedInt32Array(11, 8, 7), PackedInt32Array(11, 7, 12), PackedInt32Array(5, 2, 13, 14), PackedInt32Array(15, 11, 12, 16), PackedInt32Array(3, 4, 17), PackedInt32Array(6, 3, 17), PackedInt32Array(16, 6, 17, 14), PackedInt32Array(15, 16, 14, 13), PackedInt32Array(15, 13, 18, 19)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-960, -540, -960, 540, 960, 540, 960, -540)])
 agent_radius = 66.0
 
@@ -77,27 +77,31 @@ position = Vector2(-384, -384)
 position = Vector2(-384, 384)
 
 [node name="Enemy12" parent="Wave2" unique_id=388781700 instance=ExtResource("2_qfrtj")]
-position = Vector2(-832, 0)
+position = Vector2(320, 0)
 
 [node name="Turret" parent="Wave2" unique_id=1425931070 instance=ExtResource("2_n4ryr")]
-position = Vector2(896, 0)
+position = Vector2(832, 0)
+
+[node name="Turret2" parent="Wave2" unique_id=2107325451 instance=ExtResource("2_n4ryr")]
+position = Vector2(-832, 0)
 
 [node name="Wave3" type="Node2D" parent="." unique_id=1256098576]
 process_mode = 4
 
 [node name="Enemy9" parent="Wave3" unique_id=2031404719 instance=ExtResource("2_qfrtj")]
-position = Vector2(832, -384)
+position = Vector2(768, -320)
 
 [node name="Enemy10" parent="Wave3" unique_id=1816728558 instance=ExtResource("2_qfrtj")]
-position = Vector2(832, 384)
+position = Vector2(768, 320)
 
 [node name="Enemy12" parent="Wave3" unique_id=376458170 instance=ExtResource("2_qfrtj")]
-position = Vector2(-320, 448)
+position = Vector2(-384, 448)
 
 [node name="Enemy13" parent="Wave3" unique_id=763335781 instance=ExtResource("2_qfrtj")]
-position = Vector2(-320, -448)
+position = Vector2(-384, -448)
 
 [node name="Enemy14" parent="Wave3" unique_id=1527990809 instance=ExtResource("2_qfrtj")]
+position = Vector2(-256, 0)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1011532762]
 unique_name_in_owner = true
@@ -207,6 +211,16 @@ collision_mask = 9
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Hole8" unique_id=1095441563]
 position = Vector2(-80, -8)
 shape = SubResource("RectangleShape2D_n4ryr")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D" unique_id=416877627]
+position = Vector2(-895, 385)
+vertices = PackedVector2Array(0, 0, 190, 0, 190, 90, 0, 90)
+affect_navigation_mesh = true
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="NavigationRegion2D" unique_id=1503774786]
+position = Vector2(-895, -475)
+vertices = PackedVector2Array(0, 0, 190, 0, 190, 90, 0, 90)
+affect_navigation_mesh = true
 
 [node name="TvScreen" type="Sprite2D" parent="." unique_id=2116064299]
 visible = false

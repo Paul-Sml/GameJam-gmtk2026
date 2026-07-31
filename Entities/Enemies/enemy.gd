@@ -9,7 +9,7 @@ class_name Enemy
 @export var speed: float = 250.0
 var knockback_velocity: Vector2 = Vector2.ZERO
 const KNOCKBACK_POWER: float = 1200
-@export var bounce_factor: float = 0.3
+@export var bounce_factor: float = 0.4
 
 var player: Node2D = null
 

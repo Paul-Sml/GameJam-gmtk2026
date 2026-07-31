@@ -83,10 +83,10 @@ shape = SubResource("CircleShape2D_5mfqg")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1358740519]
 rotation = 1.5707964
-scale = Vector2(4, 4)
+scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_h8c8n")
 autoplay = "default"
-frame_progress = 0.3092488
+frame_progress = 0.4505807
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1935350998]
 collision_layer = 0

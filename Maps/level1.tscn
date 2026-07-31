@@ -59,10 +59,10 @@ position = Vector2(519, -505)
 process_mode = 4
 
 [node name="Enemy8" parent="Wave2" unique_id=1285911448 instance=ExtResource("2_mqbrx")]
-position = Vector2(832, -128)
+position = Vector2(448, -384)
 
 [node name="Enemy9" parent="Wave2" unique_id=711175824 instance=ExtResource("2_mqbrx")]
-position = Vector2(832, 128)
+position = Vector2(448, 384)
 
 [node name="Enemy10" parent="Wave2" unique_id=642678354 instance=ExtResource("2_mqbrx")]
 position = Vector2(-768, 0)
@@ -140,7 +140,7 @@ shape = SubResource("RectangleShape2D_5w0r4")
 texture = ExtResource("4_cokd3")
 
 [node name="Timer" type="Timer" parent="." unique_id=336909630]
-wait_time = 2.5
+wait_time = 5.0
 one_shot = true
 autostart = true
 

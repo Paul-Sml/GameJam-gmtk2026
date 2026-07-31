@@ -9,11 +9,36 @@
 [ext_resource type="Texture2D" uid="uid://b4fqnx64omj62" path="res://Assets/LevelDownMenu/ButtonOk.png" id="7_sin7p"]
 [ext_resource type="Texture2D" uid="uid://ll12s28ac6hm" path="res://Assets/LevelDownMenu/ButtonOkPressed.png" id="8_35pf5"]
 [ext_resource type="Texture2D" uid="uid://cdn3hop83k8h4" path="res://Assets/LevelDownMenu/ButtonPos.png" id="9_0r26s"]
+[ext_resource type="Shader" uid="uid://sywqc8fevsrp" path="res://UI/button_shine.gdshader" id="9_kms23"]
 [ext_resource type="Texture2D" uid="uid://biv2iyx4ebhnh" path="res://Assets/LevelDownMenu/ButtonPosPressed.png" id="10_ehsoa"]
 [ext_resource type="Texture2D" uid="uid://db43y5yw30l58" path="res://Assets/LevelDownMenu/Icon2.png" id="10_rr061"]
 [ext_resource type="Texture2D" uid="uid://bjyyj5wn6ft8s" path="res://Assets/LevelDownMenu/Icon1.png" id="11_kms23"]
 [ext_resource type="Texture2D" uid="uid://d4e7qup837qpe" path="res://Assets/LevelDownMenu/Icon3.png" id="12_d0acn"]
 [ext_resource type="Texture2D" uid="uid://elrgds6ncplm" path="res://Assets/LevelDownMenu/LevelDownAnimGlitch-Sheet.png" id="13_rg21y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4b8f5"]
+shader = ExtResource("9_kms23")
+shader_parameter/shine_size = 0.03999999910592
+shader_parameter/shine_angle = 75.00000111759
+shader_parameter/shine_speed = 1.1
+shader_parameter/shine_spacing = 0.11999999731776
+shader_parameter/shine_active = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kms23"]
+shader = ExtResource("9_kms23")
+shader_parameter/shine_size = 0.04
+shader_parameter/shine_angle = 75.0
+shader_parameter/shine_speed = 1.1
+shader_parameter/shine_spacing = 0.12
+shader_parameter/shine_active = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0acn"]
+shader = ExtResource("9_kms23")
+shader_parameter/shine_size = 0.04
+shader_parameter/shine_angle = 75.0
+shader_parameter/shine_speed = 1.1
+shader_parameter/shine_spacing = 0.12
+shader_parameter/shine_active = true
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_35pf5"]
 
@@ -245,6 +270,7 @@ stretch_mode = 2
 
 [node name="StrengthButton" type="TextureButton" parent="Menuing/VBoxContainer2/Strength/TickableCounter" unique_id=1585916686]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4b8f5")
 custom_minimum_size = Vector2(0, 16)
 custom_maximum_size = Vector2(-1, 16)
 layout_mode = 2
@@ -281,6 +307,7 @@ stretch_mode = 2
 
 [node name="ArmorButton" type="TextureButton" parent="Menuing/VBoxContainer2/Armor/TickableCounter" unique_id=517934494]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kms23")
 custom_minimum_size = Vector2(0, 16)
 custom_maximum_size = Vector2(-1, 16)
 layout_mode = 2
@@ -317,6 +344,7 @@ stretch_mode = 2
 
 [node name="SpeedButton" type="TextureButton" parent="Menuing/VBoxContainer2/Speed/TickableCounter" unique_id=1048010615]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_d0acn")
 custom_minimum_size = Vector2(0, 16)
 custom_maximum_size = Vector2(-1, 16)
 layout_mode = 2
